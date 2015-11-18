@@ -75,23 +75,9 @@ module.exports = function(app, passport){
 		failureRedirect: '/'
 	}));
 	
-	app.get('/unlink/local', function(req, res){
-		var user = req.user;
-		
-		user.local.email = undefined;
-		user.local.password = undefined;
-		user.save(function(err){
-			res.redirect('/profile');
-		});
-	});
+	app.get('/unlink/local', users.unlinkLocal);
 	
-	app.get('/unlink/facebook', function(req, res) {
-        var user            = req.user;
-        user.facebook.token = undefined;
-        user.save(function(err) {
-            res.redirect('/profile');
-        });
-    });
+	app.get('/unlink/facebook', users.unlinkFacebook);
 	
 	app.get('/unlink/google', users.unlinkGoogle);
 	
