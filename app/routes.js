@@ -1,4 +1,7 @@
 var users = require('./controller/users.js');
+var babies = require('./controller/babies.js');
+
+var SUCCESSFUL_LOGIN = '/babies';
 
 module.exports = function(app, passport){
 	app.get('/', function(req, res){
@@ -10,7 +13,7 @@ module.exports = function(app, passport){
 	});
 	
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/profile',
+		successRedirect: SUCCESSFUL_LOGIN,
 		failureRedirect: '/login',
 		failureFlash: true
 	}));
@@ -20,7 +23,7 @@ module.exports = function(app, passport){
 	});
 	
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/profile',
+		successRedirect: SUCCESSFUL_LOGIN,
 		failureRedirect: '/signup',
 		failureFlash: true
 	}));
@@ -40,14 +43,14 @@ module.exports = function(app, passport){
 	
 	app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect : '/profile',
+            successRedirect : SUCCESSFUL_LOGIN,
             failureRedirect : '/'
         }));
 	
 	app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}))
 	
 	app.get('/auth/google/callback', passport.authenticate('google', {
-		successRedirect: '/profile',
+		successRedirect: SUCCESSFUL_LOGIN,
 		failureRedirect: '/'
 	}));
 	
@@ -56,7 +59,7 @@ module.exports = function(app, passport){
 	});
 	
 	app.post('/connect/local', passport.authenticate('local-signup', {
-		successRedirect: '/profile',
+		successRedirect: SUCCESSFUL_LOGIN,
 		failureRedirect: '/connect/local',
 		failureFlash: true
 	}));
@@ -64,14 +67,14 @@ module.exports = function(app, passport){
 	app.get('/connect/facebook', passport.authorize('facebook', {scope: 'email'}));
 	
 	app.get('/connect/facebook/callback', passport.authorize('facebook', {
-		successRedirect: '/profile',
+		successRedirect: SUCCESSFUL_LOGIN,
 		failureRedirect: '/'
 	}));
 	
 	app.get('/connect/google', passport.authorize('google', {scope: ['profile', 'email']}));
 	
 	app.get('/connect/google/callback', passport.authorize('google', {
-		successRedirect: '/profile',
+		successRedirect: SUCCESSFUL_LOGIN,
 		failureRedirect: '/'
 	}));
 	
@@ -80,6 +83,14 @@ module.exports = function(app, passport){
 	app.get('/unlink/facebook', users.unlinkFacebook);
 	
 	app.get('/unlink/google', users.unlinkGoogle);
+	
+	app.get('/babies', babies.listBabies);
+	
+	app.get('/babies/list', function(req, res){
+		res.render('baby/babyList.ejs',{
+			user: req.user
+		})
+	})
 	
 	function isLoggedIn(req, res, next){
 		if(req.isAuthenticated()){
