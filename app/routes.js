@@ -5,7 +5,11 @@ var SUCCESSFUL_LOGIN = '/babies';
 
 module.exports = function(app, passport){
 	app.get('/', function(req, res){
-		res.render('index.ejs');
+		if(req.user){
+			res.redirect('/babies');
+		}else{
+			res.render('index.ejs');	
+		}
 	});
 	
 	app.get('/login', function(req, res){
