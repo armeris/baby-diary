@@ -28,4 +28,14 @@ userSchema.methods.validPassword = function(password){
 	return bcrypt.compareSync(password, this.local.password);
 }
 
+userSchema.methods.name = function(){
+	if(this.facebook.name){
+		return(this.facebook.name);
+	}else if(this.google.name){
+		return(this.google.name);
+	}else{
+		return(this.local.email);
+	}
+}
+
 module.exports = mongoose.model('User', userSchema);

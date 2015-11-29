@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
+    <title>Baby agenda</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
@@ -10,6 +10,12 @@
 </head>
 <body>
 <div class="container">
+
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<p class="navbar-text pull-right">Signed in as <%= user.name() %></p>
+			</div>
+		</nav>
 
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Profile Page</h1>
