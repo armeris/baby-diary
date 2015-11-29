@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Baby list for <%= user.facebook.name %> </title>
+    <title>Baby list</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <style>
@@ -11,12 +11,41 @@
 <body>
 <div class="container">
 
-    <div class="jumbotron text-center">
-        <% if(babies.length > 0) {%>
-        <h2>These are your babies</h2>
-        <% } %>
-        <h2>Add a baby</h2>
-    </div>
+		<% if (babies && babies.length > 0) { %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">These are your babies</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+				<% for(var i=0; i < babies.length; i++) { %>
+					<li class="list-group-item"><%= babies[i].name %></li>
+				<% } %>
+				</ul>
+			</div>
+		</div>
+		<% } %>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Add a baby</h3>
+			</div>
+			<div class="panel-body">
+				<form action="/babies/add" method="POST">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" required name="name"/>
+					</div>
+					<div class="form-group">
+						<label for="birthDate">Birthdate</label>
+						<input type="date" required name="birthDate"/>
+					</div>
+					
+					<button type="submit" class="btn btn-warning btn-lg">Add</button>
+				</form>
+			</div>
+		</div>
+		
 
 </div>
 </body>

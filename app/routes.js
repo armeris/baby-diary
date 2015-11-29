@@ -84,13 +84,9 @@ module.exports = function(app, passport){
 	
 	app.get('/unlink/google', users.unlinkGoogle);
 	
-	app.get('/babies', babies.listBabies);
+	app.get('/babies', isLoggedIn, babies.listBabies);
 	
-	app.get('/babies/list', function(req, res){
-		res.render('baby/babyList.ejs',{
-			user: req.user
-		})
-	})
+	app.post('/babies/add', isLoggedIn, babies.add);
 	
 	function isLoggedIn(req, res, next){
 		if(req.isAuthenticated()){
