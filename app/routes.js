@@ -32,11 +32,7 @@ module.exports = function(app, passport){
 		failureFlash: true
 	}));
 	
-	app.get('/profile', isLoggedIn, function(req, res){
-		res.render('profile.ejs', {
-			user: req.user
-		})
-	});
+	app.get('/profile', isLoggedIn, users.profile);
 	
 	app.get('/logout', function(req, res){
 		req.logout();
@@ -89,6 +85,8 @@ module.exports = function(app, passport){
 	app.get('/unlink/google', users.unlinkGoogle);
 	
 	app.get('/babies', isLoggedIn, babies.listBabies);
+	
+	app.get('/babies/add', isLoggedIn, babies.addBaby);
 	
 	app.post('/babies/add', isLoggedIn, babies.add);
 	

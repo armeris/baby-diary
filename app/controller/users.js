@@ -1,4 +1,11 @@
 var User = require('../model/user');
+var Baby = require('../model/baby');
+
+exports.profile = function(req,res){
+	Baby.fetchByUser(req.user.id, function(data){
+		res.render('user/profile', {user: req.user, babies: data});
+	});
+}
 
 exports.unlinkGoogle = function(req, res){
 	var user = req.user;
