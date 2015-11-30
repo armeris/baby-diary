@@ -4,6 +4,8 @@
     <title>Baby list</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <style>
         body        { padding-top:80px; }
     </style>
@@ -12,25 +14,38 @@
 <div class="container">
 
 	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<p class="navbar-text pull-right">Signed in as <%= user.name() %></p>
-		</div>
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Baby diary</a>
+			</div>
+	
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My babies <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<% if (babies && babies.length > 0) { %>
+								<% for(var i=0; i < babies.length; i++) { %>
+									<li><a href="#"><%= babies[i].name %></a></li>
+								<% } %>
+							<% } %>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/profile"><%= user.name() %></a></li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
 	</nav>
-
-	<% if (babies && babies.length > 0) { %>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">These are your babies</h3>
-		</div>
-		<div class="panel-body">
-			<ul class="list-group">
-			<% for(var i=0; i < babies.length; i++) { %>
-				<li class="list-group-item"><%= babies[i].name %></li>
-			<% } %>
-			</ul>
-		</div>
-	</div>
-	<% } %>
 	
 	<div class="panel panel-default">
 		<div class="panel-heading">

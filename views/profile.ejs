@@ -12,8 +12,11 @@
 <div class="container">
 
 		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container">
-				<p class="navbar-text pull-right">Signed in as <%= user.name() %></p>
+			<div class="container-fluid">
+				
+				<div class="navbar-header navbar-right">
+					<p class="navbar-text">Signed in as <a href="/profile"><%= user.name() %></a></p>
+				</div>
 			</div>
 		</nav>
 
