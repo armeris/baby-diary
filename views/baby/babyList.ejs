@@ -4,6 +4,8 @@
     <title>Baby list</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <style>
         body        { padding-top:80px; }
     </style>
@@ -30,13 +32,11 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My babies <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="#">One more separated link</a></li>
+							<% if (babies && babies.length > 0) { %>
+								<% for(var i=0; i < babies.length; i++) { %>
+									<li><a href="#"><%= babies[i].name %></a></li>
+								<% } %>
+							<% } %>
 						</ul>
 					</li>
 				</ul>
@@ -46,21 +46,6 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-
-	<% if (babies && babies.length > 0) { %>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">These are your babies</h3>
-		</div>
-		<div class="panel-body">
-			<ul class="list-group">
-			<% for(var i=0; i < babies.length; i++) { %>
-				<li class="list-group-item"><%= babies[i].name %></li>
-			<% } %>
-			</ul>
-		</div>
-	</div>
-	<% } %>
 	
 	<div class="panel panel-default">
 		<div class="panel-heading">
