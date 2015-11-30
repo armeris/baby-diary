@@ -1,15 +1,15 @@
 var Baby = require('../model/baby');
 
 exports.listBabies = function(req, res){
-	Baby.find().exec(function(err, babies){
-		var myBabies = [];
-		babies.forEach(function(baby){
-			if(baby.owners.indexOf(req.user.id) != -1){
-				myBabies[myBabies.length] =baby;
-			}
-		});
-		res.render('baby/babyList',{user:req.user, babies: myBabies});
+	Baby.fetchByUser(req.user.id, function(data){
+		res.render('baby/babyList',{user:req.user, babies: data});
 	}); 
+}
+
+exports.addBaby = function(req, res){
+	Baby.fetchByUser(req.user.id, function(data){
+		res.render('baby/addBaby',{user:req.user, babies: data});
+	});
 }
 
 exports.add = function(req, res){
