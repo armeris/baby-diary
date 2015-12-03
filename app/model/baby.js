@@ -4,7 +4,7 @@ var babySchema = mongoose.Schema({
 	owners: [String],
 	name: String,
 	birthDate: String,
-	events: [{date: Date, eventType: String, comment: String}]
+	events: [{date: Date, eventType: String, eventClass: String, eventAmount: Number, comment: String}]
 });
 
 babySchema.statics.fetchByUser = function (userId, callback){
