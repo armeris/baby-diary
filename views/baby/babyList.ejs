@@ -7,7 +7,9 @@
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 		<script src="/js/baby-diary.js"></script>
+		<script src="/js/bootstrap-slider.js"></script>
 		<link rel="stylesheet" href="/css/baby-diary.css"></link>
+		<link rel="stylesheet" href="/css/bootstrap-slider.css"></link>
     <style>
         body        { padding-top:80px; }
     </style>
@@ -17,26 +19,73 @@
 		<% include ../partials/topMenu %>
 		
 		<div id="addEventContainer">
-			<div class="jumbotron startEventCreation" style="border:4px dashed darkgrey;">
+			<div class="jumbotron startEventCreation" style="border:4px dashed darkgrey;padding-right:0px;">
 				<h1 style="text-align: center;"><a id="addEvent" style="text-decoration: none; color: black;" href="#">+ Add event</a></h1>
-				<div class="group-selector">
+				<div class="group-selector baby-selector line1">
+					<% for(var i=0; i<babies.length; i++) { %>
+					<div class="selector baby-box" data-field="babyId" data-type="<%= babies[i]._id%>"><%= babies[i].name %></div>
+					<% } %>
+				</div>
+				<div class="clearer"></div>
+				<div class="group-selector after-baby line2">
 					<div class="selector food-box" data-field="eventType" data-type="food">Food</div>
 					<div class="selector diaper-box" data-field="eventType" data-type="diaper">Diaper</div>
 				</div>
-				<div class="group-selector food">
+				<div class="clearer"></div>
+				<div class="group-selector food line3">
 					<div class="selector boob-box" data-field="eventClass" data-type="boob">Boob</div>
 					<div class="selector bottle-box" data-field="eventClass" data-type="bottle">Bottle</div>
 				</div>
-				<div class="group-selector diaper">
+				<div class="group-selector diaper line3">
 					<div class="selector pee-box" data-field="eventClass" data-type="pee">Pee</div>
 					<div class="selector poo-box" data-field="eventClass" data-type="poo">Poo</div>
+				</div>
+				<div class="clearer"></div>
+				<div class="group-selector pee line4">
+					<div class="selector pee-amount-box" data-field="eventClass" data-type="amount">Little</div>
+					<div class="selector poo-amount-abox" data-field="eventClass" data-type="amount">Normal</div>
+					<div class="selector poo-amount-abox" data-field="eventClass" data-type="amount">Much</div>
+				</div>
+				<div class="group-selector poo line4">
+					<div class="selector pee-amount-box" data-field="eventClass" data-type="amount">Little</div>
+					<div class="selector poo-amount-abox" data-field="eventClass" data-type="amount">Normal</div>
+					<div class="selector poo-amount-abox" data-field="eventClass" data-type="amount">Much</div>
+				</div>
+				<div style="clear:both;"></div>
+				<div class="group-selector boob line5">
+					<div class="hidden">
+						<div class="form-group">
+							<label for="boob-amount" style="margin-right:10px">Amount: </label>
+							<input name="boob-amount" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="0"/>
+							<span id="boob-amount-label"><span id="boob-amount-label-number">0</span> minutes</span>
+						</div>
+						<div class="form-group">
+							<label for="comments">Comments: </label>
+							<textarea name="comments" class="form-control"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="group-selector bottle line5">
+					<div class="hidden">
+						<div class="form-group">
+							<label for="bottle-amount" style="margin-right:10px">Amount: </label>
+							<input name="bottle-amount" type="text" data-slider-min="0" data-slider-max="400" data-slider-step="10" data-slider-value="0"/>
+							<span id="bottle-amount-label"><span id="bottle-amount-label-number">0</span> ml</span>
+						</div>
+						<div class="form-group">
+							<label for="comments">Comments: </label>
+							<textarea name="comments" class="form-control" name="comment"></textarea>
+						</div>
+					</div>
 				</div>
 				<div style="clear: both;"></div>
 			</div>
 			<form name="addEvent" method="post">
+				<input type="hidden" name="babyId"/>
 				<input type="hidden" name="eventType"/>
 				<input type="hidden" name="eventClass"/>
 				<input type="hidden" name="eventAmount"/>
+				<input type="hidden" name="eventComment"/>
 			</form>
 		</div>
 </div>
