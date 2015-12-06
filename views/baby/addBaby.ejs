@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Baby list</title>
+    <title>Lista de bebés</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -19,24 +19,24 @@
 		
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Add a baby</h3>
+				<h3 class="panel-title">Añadir bebé</h3>
 			</div>
 			<div class="panel-body">
 				<form action="/babies/add" method="POST">
 					<div class="form-group">
 						<div class="input-group">
-							<span class="input-group-addon">Name</span>
+							<span class="input-group-addon">Nombre</span>
 							<input type="text" class="form-control" aria-describedby="name" required name="name" />
 						</div>
 					</div>
 					<div class="form-group">
 							<div class='input-group date' id='datetimepicker'>
-									<span class="input-group-addon">Birthdate</span>
+									<span class="input-group-addon">Fecha de nacimiento</span>
 									<input type='text' class="form-control" />
 							</div>
 					</div>
 					
-					<button type="submit" class="btn btn-success btn-lg">Add</button>
+					<button type="submit" class="btn btn-success btn-lg">Añadir</button>
 				</form>
 			</div>
 		</div>

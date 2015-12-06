@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Baby list</title>
+    <title>Lista de bebés</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -18,77 +18,39 @@
 <div class="container">
 		<% include ../partials/topMenu %>
 		
-		<div id="addEventContainer">
-			<div class="jumbotron startEventCreation" style="border:4px dashed darkgrey;padding-right:0px;">
-				<form name="addEvent" action="/babies/addEvent" method="post">
-					<h1 style="text-align: center;"><a id="addEvent" style="text-decoration: none; color: black;" href="#">+ Add event</a></h1>
-					<div class="group-selector baby-selector line1">
-						<% for(var i=0; i<babies.length; i++) { %>
-						<div class="selector baby-box" data-field="babyId" data-type="<%= babies[i]._id%>"><%= babies[i].name %></div>
-						<% } %>
-					</div>
-					<div class="clearer"></div>
-					<div class="group-selector after-baby line2">
-						<div class="selector food-box" data-field="eventType" data-type="food">Food</div>
-						<div class="selector diaper-box" data-field="eventType" data-type="diaper">Diaper</div>
-					</div>
-					<div class="clearer"></div>
-					<div class="group-selector food line3">
-						<div class="selector boob-box" data-field="eventClass" data-type="boob">Boob</div>
-						<div class="selector bottle-box" data-field="eventClass" data-type="bottle">Bottle</div>
-					</div>
-					<div class="group-selector diaper line3">
-						<div class="selector pee-box" data-field="eventClass" data-type="pee">Pee</div>
-						<div class="selector poo-box" data-field="eventClass" data-type="poo">Poo</div>
-					</div>
-					<div class="clearer"></div>
-					<div class="group-selector pee line4">
-						<div class="selector pee-amount-box" data-field="eventClass" data-type="amount">Little</div>
-						<div class="selector poo-amount-abox" data-field="eventClass" data-type="amount">Normal</div>
-						<div class="selector poo-amount-abox" data-field="eventClass" data-type="amount">Much</div>
-					</div>
-					<div class="group-selector poo line4">
-						<div class="selector pee-amount-box" data-field="eventClass" data-type="amount">Little</div>
-						<div class="selector poo-amount-abox" data-field="eventClass" data-type="amount">Normal</div>
-						<div class="selector poo-amount-abox" data-field="eventClass" data-type="amount">Much</div>
-					</div>
-					<div style="clear:both;"></div>
-					<div class="group-selector boob line4">
-						<div class="hidden">
-							<div class="form-group">
-								<label for="boob-amount" style="margin-right:10px">Amount: </label>
-								<input name="boob-amount" type="text" data-slider-min="0" data-field="eventAmount" data-type="" data-slider-max="100" data-slider-step="5" data-slider-value="0"/>
-								<span id="boob-amount-label"><span id="boob-amount-label-number">0</span> minutes</span>
-							</div>
-						</div>
-					</div>
-					<div class="group-selector bottle line4">
-						<div class="hidden">
-							<div class="form-group">
-								<label for="bottle-amount" style="margin-right:10px">Amount: </label>
-								<input name="bottle-amount" type="text" data-slider-min="0" data-slider-max="400" data-slider-step="10" data-slider-value="0"/>
-								<span id="bottle-amount-label"><span id="bottle-amount-label-number">0</span> ml</span>
-							</div>
-						</div>
-					</div>
-					<div class="comments">
-						<div class="form-group hidden">
-							<label for="comments">Comments: </label>
-							<textarea name="comments" class="form-control"></textarea>
-						</div>
-						<div class="form-group hidden">
-							<input type="submit" class="btn btn-success"/>
-						</div>
-					</div>
-					<div style="clear: both;"></div>
+		<% include ../partials/eventSelector %>
+		
+		<% for(var i=0; i<babies.length; i++){ %>
+			<% if(babies[i].events.length > 0) { %>
+			<div class="baby-container">
+				<h3><%= babies[i].name %></h3>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Tipo de evento</th>
+								<th>Evento</th>
+								<th>Cantidad</th>
+								<th>Hora</th>
+								<th>Comentarios</th>
+							</tr>
+						</thead>
+						<tbody class="table-hover">
+							<% for (var j=0; j<babies[i].events.length; j++){ %>
+								<tr>
+									<td><%= babies[i].events[j].eventClass %></td>
+									<td><%= babies[i].events[j].eventType %></td>
+									<td><%= babies[i].events[j].eventAmount %></td>
+									<td><%= babies[i].events[j].date %></td>
+									<td><%= babies[i].events[j].comment %></td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
 				</div>
-				
-				<input type="hidden" name="babyId"/>
-				<input type="hidden" name="eventType"/>
-				<input type="hidden" name="eventClass"/>
-				<input type="hidden" name="eventAmount"/>
-			</form>
-		</div>
+			</div>
+			<% } %>
+		<% } %>
 </div>
 </body>
 </html>
