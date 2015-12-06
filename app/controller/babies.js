@@ -22,3 +22,21 @@ exports.add = function(req, res){
 	
 	res.redirect(302, '/babies');
 }
+
+exports.addEvent = function(req, res){
+	Baby.fetchById(req.body.babyId, function(baby){
+		baby.events.push({date: new Date(), 
+											eventType: req.body.eventType, 
+											eventClass: req.body.eventClass, 
+											eventAmount: req.body.eventAmount, 
+											comment: req.body.comments
+		});
+		baby.save(function(err){
+			if(err){
+				console.log(err);
+			}
+		});
+		
+		res.redirect(302, '/babies');
+	});
+}

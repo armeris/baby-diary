@@ -17,8 +17,7 @@ $(function(){
 	
 	$('a#addEvent').click(function(){
 		$('div.jumbotron.startEventCreation h1').toggle();
-		$('div.jumbotron.startEventCreation div.food-box').toggle();
-		$('div.jumbotron.startEventCreation div.diaper-box').toggle();
+		$('div.jumbotron.startEventCreation div.baby-box').toggle();
 		return false;
 	});
 	
@@ -28,16 +27,48 @@ $(function(){
 			$('.group-selector.'+$(this).attr('data-type')).children().hide();
 		}else{
 			$(this).siblings().removeClass('selected');
-			var parentIndex = $('.jumbotron.startEventCreation').children('.group-selector').index($(this).parent());
-			$(this).parent().siblings().each(function(index, item){
-				if(index > parentIndex){
-					$(item).children().hide();
-					$(item).children().removeClass('selected');
+			var parentLine = $(this).parent().attr('class').split(/\s+/).filter(function(elem){
+				return elem.startsWith('line');
+			})[0].substring(4);
+			$('.group-selector').each(function(){
+				var currentLine = $(this).attr('class').split(/\s+/).filter(function(elem){
+					return elem.startsWith('line');
+				})[0].substring(4);
+				if(Number(currentLine) > Number(parentLine) && !$(this).hasClass('comments')){
+					$(this).children().removeClass('selected');
+					$(this).children().hide();
 				}
 			});
 			$(this).addClass('selected');
 			$('input[name='+$(this).attr('data-field')+']').val($(this).attr('data-type'));
-			$('.group-selector.'+$(this).attr('data-type')).children().show();
+			if($(this).attr('data-field') === 'babyId'){
+				$('.group-selector.after-baby').children().show();
+			}else{
+				$('.group-selector.'+$(this).attr('data-type')).children().removeClass('hidden');
+				$('.group-selector.'+$(this).attr('data-type')).children().show();
+			}
+			if($(this).parent().hasClass('line3')){
+						$('div.comments').children().removeClass('hidden').show();
+					}
+			if($(this).parent().hasClass('line2') ||
+					$(this).parent().hasClass('line1')){
+						$('div.comments').children().addClass('hidden').hide();
+					}
 		}
+	});
+	
+	$("input[name=boob-amount]").slider({
+		tooltip: 'always'
+	});
+	$("input[name=boob-amount]").on("slide", function(slideEvt) {
+		$("#boob-amount-label-number").text(slideEvt.value);
+	});
+	
+	$("input[name=bottle-amount]").slider({
+		tooltip: 'always'
+	});
+	$("input[name=bottle-amount]").on("slide", function(slideEvt) {
+		$("#bottle-amount-label-number").text(slideEvt.value);
+		$("input[name=eventAmount]").val($(this).val());
 	});
 });
