@@ -34,7 +34,7 @@ $(function(){
 				var currentLine = $(this).attr('class').split(/\s+/).filter(function(elem){
 					return elem.startsWith('line');
 				})[0].substring(4);
-				if(Number(currentLine) > Number(parentLine)){
+				if(Number(currentLine) > Number(parentLine) && !$(this).hasClass('comments')){
 					$(this).children().removeClass('selected');
 					$(this).children().hide();
 				}
@@ -47,6 +47,13 @@ $(function(){
 				$('.group-selector.'+$(this).attr('data-type')).children().removeClass('hidden');
 				$('.group-selector.'+$(this).attr('data-type')).children().show();
 			}
+			if($(this).parent().hasClass('line3')){
+						$('div.comments').children().removeClass('hidden').show();
+					}
+			if($(this).parent().hasClass('line2') ||
+					$(this).parent().hasClass('line1')){
+						$('div.comments').children().addClass('hidden').hide();
+					}
 		}
 	});
 	
@@ -62,5 +69,6 @@ $(function(){
 	});
 	$("input[name=bottle-amount]").on("slide", function(slideEvt) {
 		$("#bottle-amount-label-number").text(slideEvt.value);
+		$("input[name=eventAmount]").val($(this).val());
 	});
 });

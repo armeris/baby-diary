@@ -19,4 +19,12 @@ babySchema.statics.fetchByUser = function (userId, callback){
 	});
 }
 
+babySchema.statics.fetchById = function (babyId, callback){
+	this.findOne({_id:babyId}).exec(function(err, baby){
+		if(!err){
+			callback(baby);
+		}
+	});
+}
+
 module.exports = mongoose.model('Baby', babySchema);
