@@ -39,9 +39,9 @@ exports.addEvent = function(req, res){
 			amount = req.body.eventAmount ? req.body.eventAmount : 0;
 		}
 		
-		var date = moment(new Date()).tz('Europe/Madrid').format()
+		var date = new Date()
 		if(req.body.eventDate !== ''){
-			date = moment(req.body.eventDate).tz('Europe/Madrid').format();
+			date = req.body.eventDate;
 		}
 		
 		baby.events.push({date: date, 

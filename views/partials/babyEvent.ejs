@@ -43,6 +43,6 @@
 			&nbsp;
 		<% } %>
 	</td>
-	<td><%= moment(event.date).format('DD/MM/YYYY HH:mm') %></td>
+	<td><%= moment(event.date).tz('Europe/Madrid').format('DD/MM/YYYY HH:mm') %></td>
 	<td><%= event.comment %></td>
 </tr>
