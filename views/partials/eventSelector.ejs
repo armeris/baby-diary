@@ -1,0 +1,77 @@
+<div id="addEventContainer">
+	<div class="jumbotron startEventCreation" style="border:4px dashed darkgrey;padding-right:0px;">
+		<form name="addEvent" action="/babies/addEvent" method="post">
+			<h1 style="text-align: center;"><a id="addEvent" style="text-decoration: none; color: black;" href="#">+ Añadir evento</a></h1>
+			<div class="group-selector baby-selector line1">
+				<% for(var i=0; i<babies.length; i++) { %>
+				<div class="selector baby-box" data-field="babyId" data-type="<%= babies[i]._id%>"><%= babies[i].name %></div>
+				<% } %>
+			</div>
+			<div class="clearer"></div>
+			<div class="group-selector after-baby line2">
+				<div class="selector food-box" data-field="eventType" data-type="food">Comida</div>
+				<div class="selector diaper-box" data-field="eventType" data-type="diaper">Pañales</div>
+				<div class="selector diaper-box" data-field="eventType" data-type="others">Otros</div>
+			</div>
+			<div class="clearer"></div>
+			<div class="group-selector food line3">
+				<div class="selector boob-box" data-field="eventClass" data-type="boob">Teta</div>
+				<div class="selector bottle-box" data-field="eventClass" data-type="bottle">Biberón</div>
+			</div>
+			<div class="group-selector diaper line3">
+				<div class="selector pee-box" data-field="eventClass" data-type="pee">Pis</div>
+				<div class="selector poo-box" data-field="eventClass" data-type="poo">Caca</div>
+			</div>
+			<div class="group-selector others line3">
+				<div class="selector vitamin-box" data-field="eventClass" data-type="vitamin">Vitaminas</div>
+				<div class="selector medicin-box" data-field="eventClass" data-type="medicine">Medicina</div>
+				<div class="selector vomit-box" data-field="eventClass" data-type="vomit">Vómito</div>
+			</div>
+			<div class="clearer"></div>
+			<div class="group-selector pee line4">
+				<div class="selector pee-amount-box" data-field="eventAmount" data-type="little">Poco</div>
+				<div class="selector poo-amount-abox" data-field="eventAmount" data-type="normal">Normal</div>
+				<div class="selector poo-amount-abox" data-field="eventAmount" data-type="much">Mucho</div>
+			</div>
+			<div class="group-selector poo line4">
+				<div class="selector pee-amount-box" data-field="eventAmount" data-type="little">Poco</div>
+				<div class="selector poo-amount-abox" data-field="eventAmount" data-type="normal">Normal</div>
+				<div class="selector poo-amount-abox" data-field="eventAmount" data-type="much">Mucho</div>
+			</div>
+			<div style="clear:both;"></div>
+			<div class="group-selector boob line4">
+				<div class="hidden">
+					<div class="form-group">
+						<label for="boob-amount" style="margin-right:10px">Cantidad: </label>
+						<input name="boob-amount" type="text" data-slider-min="0" data-field="eventAmount" data-type="" data-slider-max="100" data-slider-step="5" data-slider-value="0"/>
+						<span id="boob-amount-label"><span id="boob-amount-label-number">0</span> minutos</span>
+					</div>
+				</div>
+			</div>
+			<div class="group-selector bottle line4">
+				<div class="hidden">
+					<div class="form-group">
+						<label for="bottle-amount" style="margin-right:10px">Cantidad: </label>
+						<input name="bottle-amount" type="text" data-slider-min="0" data-slider-max="400" data-slider-step="10" data-slider-value="0"/>
+						<span id="bottle-amount-label"><span id="bottle-amount-label-number">0</span> ml</span>
+					</div>
+				</div>
+			</div>
+			<div class="comments">
+				<div class="form-group hidden">
+					<label for="comments">Comentarios: </label>
+					<textarea name="comments" class="form-control"></textarea>
+				</div>
+				<div class="form-group hidden">
+					<input type="submit" class="btn btn-success" value="Guardar"/>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<input type="hidden" name="babyId"/>
+		<input type="hidden" name="eventType"/>
+		<input type="hidden" name="eventClass"/>
+		<input type="hidden" name="eventAmount"/>
+	</form>
+</div>
