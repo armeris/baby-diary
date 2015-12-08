@@ -11,6 +11,9 @@ div.selector{
 	vertical-align:middle;
 	text-align:center;
 	cursor: pointer;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 div.selector:hover{
