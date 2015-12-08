@@ -14,7 +14,7 @@
 				</thead>
 				<tbody>
 					<% for (var j=0; j<baby.events.length; j++){ %>
-						<%- include('babyEvent',{event: baby.events[j]}); -%>
+						<%- include('babyEvent',{event: baby.events.sort(function(a,b){return b.date - a.date;})[j]}); -%>
 					<% } %>
 				</tbody>
 			</table>
