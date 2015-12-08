@@ -62,6 +62,7 @@ $(function(){
 	});
 	$("input[name=boob-amount]").on("slide", function(slideEvt) {
 		$("#boob-amount-label-number").text(slideEvt.value);
+		$("input[name=eventAmount]").val($(this).val());
 	});
 	
 	$("input[name=bottle-amount]").slider({
@@ -72,13 +73,8 @@ $(function(){
 		$("input[name=eventAmount]").val($(this).val());
 	});
 	
-	$('#boob-time').datetimepicker({format: 'HH:mm DD/MM/YYYY', defaultDate: new Date(), useCurrent: true, sideBySide: true, locale: 'es', allowInputToggle: true, widgetPositioning: {horizontal: 'right', vertical: 'auto'}});
-	$('#boob-time').on('dp.change', function(evt){
-		$('input[name=eventDate]').val(evt.date._d);
-	});
-	
-	$('#bottle-time').datetimepicker({format: 'HH:mm DD/MM/YYYY', defaultDate: new Date(), useCurrent: true, sideBySide: true, locale: 'es', allowInputToggle: true, widgetPositioning: {horizontal: 'right', vertical: 'auto'}});
-	$('#bottle-time').on('dp.change', function(evt){
+	$('#datetimePicker').datetimepicker({format: 'HH:mm DD/MM/YYYY', defaultDate: new Date(), useCurrent: true, sideBySide: true, locale: 'es', allowInputToggle: true, widgetPositioning: {horizontal: 'right', vertical: 'auto'}});
+	$('#datetimePicker').on('dp.change', function(evt){
 		$('input[name=eventDate]').val(evt.date._d);
 	});
 });

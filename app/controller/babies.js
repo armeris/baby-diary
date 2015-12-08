@@ -36,7 +36,7 @@ exports.addEvent = function(req, res){
 				amount = 2;
 			}
 		}else{
-			amount = req.body.eventAmount ? req.body.eventAmount : 0;
+			amount = req.body.eventAmount;
 		}
 		
 		var date = new Date()
