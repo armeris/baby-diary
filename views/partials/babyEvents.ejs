@@ -1,0 +1,23 @@
+<% if(baby.events.length > 0) { %>
+	<div class="baby-container">
+		<h3><%= baby.name %></h3>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Tipo de evento</th>
+						<th>Evento</th>
+						<th>Cantidad</th>
+						<th>Hora</th>
+						<th>Comentarios</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (var j=0; j<baby.events.length; j++){ %>
+						<%- include('babyEvent',{event: baby.events[j]}); -%>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<% } %>
