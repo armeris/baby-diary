@@ -21,76 +21,7 @@
 		<% include ../partials/eventSelector %>
 		
 		<% for(var i=0; i<babies.length; i++){ %>
-			<% if(babies[i].events.length > 0) { %>
-			<div class="baby-container">
-				<h3><%= babies[i].name %></h3>
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Tipo de evento</th>
-								<th>Evento</th>
-								<th>Cantidad</th>
-								<th>Hora</th>
-								<th>Comentarios</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for (var j=0; j<babies[i].events.length; j++){ %>
-								<tr>
-									<% if(babies[i].events[j].eventType === 'food'){ %>
-										<td>Comida</td>
-									<% } else if (babies[i].events[j].eventType === 'diaper') { %>
-										<td>Pañales</td>
-									<% } else if (babies[i].events[j].eventType === 'others') { %>
-										<td>Otros</td>
-									<% } %>
-									<% if(babies[i].events[j].eventClass === 'boob'){ %>
-										<td>Teta</td>
-									<% } else if (babies[i].events[j].eventClass === 'bottle') { %>
-										<td>Biberón</td>
-									<% } else if (babies[i].events[j].eventClass === 'pee') { %>
-										<td>Pis</td>
-									<% } else if (babies[i].events[j].eventClass === 'poo') { %>
-										<td>Caca</td>
-									<% } else if (babies[i].events[j].eventClass === 'vitamin') { %>
-										<td>Vitaminas</td>
-									<% } else if (babies[i].events[j].eventClass === 'medicine') { %>
-										<td>Medicina</td>
-									<% } else if (babies[i].events[j].eventClass === 'vomit') { %>
-										<td>Vómito</td>
-									<% } %>
-									<td>
-										<% if (babies[i].events[j].eventAmount !== null) { %>
-											<% if (babies[i].events[j].eventType === 'diaper') { %>
-												<% if (babies[i].events[j].eventAmount === 0) { %>
-													Poco
-												<% } else if (babies[i].events[j].eventAmount === 1) { %>
-													Normal
-												<% } else if (babies[i].events[j].eventAmount === 2) { %>
-													Mucho
-												<% } %>
-											<% } else { %>
-												<%= babies[i].events[j].eventAmount %>
-												<% if(babies[i].events[j].eventClass === 'boob'){ %>
-													min
-												<% } else if (babies[i].events[j].eventClass === 'bottle') { %>
-													ml
-												<% } %>
-											<% } %>
-										<% } else { %>
-											&nbsp;
-										<% } %>
-									</td>
-									<td><%= moment(babies[i].events[j].date).format('DD/MM/YYYY HH:mm') %></td>
-									<td><%= babies[i].events[j].comment %></td>
-								</tr>
-							<% } %>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<% } %>
+			<%- include('../partials/babyEvents', {baby: babies[i]}); -%>
 		<% } %>
 </div>
 </body>

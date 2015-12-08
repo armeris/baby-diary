@@ -1,0 +1,48 @@
+<tr>
+	<% if(event.eventType === 'food'){ %>
+		<td>Comida</td>
+	<% } else if (event.eventType === 'diaper') { %>
+		<td>Pañales</td>
+	<% } else if (event.eventType === 'others') { %>
+		<td>Otros</td>
+	<% } %>
+	<% if(event.eventClass === 'boob'){ %>
+		<td>Teta</td>
+	<% } else if (event.eventClass === 'bottle') { %>
+		<td>Biberón</td>
+	<% } else if (event.eventClass === 'pee') { %>
+		<td>Pis</td>
+	<% } else if (event.eventClass === 'poo') { %>
+		<td>Caca</td>
+	<% } else if (event.eventClass === 'vitamin') { %>
+		<td>Vitaminas</td>
+	<% } else if (event.eventClass === 'medicine') { %>
+		<td>Medicina</td>
+	<% } else if (event.eventClass === 'vomit') { %>
+		<td>Vómito</td>
+	<% } %>
+	<td>
+		<% if (event.eventAmount !== null) { %>
+			<% if (event.eventType === 'diaper') { %>
+				<% if (event.eventAmount === 0) { %>
+					Poco
+				<% } else if (event.eventAmount === 1) { %>
+					Normal
+				<% } else if (event.eventAmount === 2) { %>
+					Mucho
+				<% } %>
+			<% } else { %>
+				<%= event.eventAmount %>
+				<% if(event.eventClass === 'boob'){ %>
+					min
+				<% } else if (event.eventClass === 'bottle') { %>
+					ml
+				<% } %>
+			<% } %>
+		<% } else { %>
+			&nbsp;
+		<% } %>
+	</td>
+	<td><%= moment(event.date).format('DD/MM/YYYY HH:mm') %></td>
+	<td><%= event.comment %></td>
+</tr>
