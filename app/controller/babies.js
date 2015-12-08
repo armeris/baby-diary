@@ -1,8 +1,9 @@
 var Baby = require('../model/baby');
+var moment = require('moment');
 
 exports.listBabies = function(req, res){
 	Baby.fetchByUser(req.user.id, function(data){
-		res.render('baby/babyList',{user:req.user, babies: data});
+		res.render('baby/babyList',{user:req.user, babies: data, moment: moment});
 	}); 
 }
 
@@ -25,10 +26,23 @@ exports.add = function(req, res){
 
 exports.addEvent = function(req, res){
 	Baby.fetchById(req.body.babyId, function(baby){
+		var amount = 0;
+		if(req.body.eventType === 'diaper'){
+			if(req.body.eventAmount === 'little'){
+				amount = 0;
+			}else if(req.body.eventAmount === 'normal'){
+				amount = 1;
+			}else if(req.body.eventAmount === 'much'){
+				amount = 2;
+			}
+		}else{
+			amount = req.body.eventAmount;
+		}
+		
 		baby.events.push({date: new Date(), 
 											eventType: req.body.eventType, 
 											eventClass: req.body.eventClass, 
-											eventAmount: req.body.eventAmount, 
+											eventAmount: amount, 
 											comment: req.body.comments
 		});
 		baby.save(function(err){
