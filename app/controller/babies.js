@@ -36,10 +36,15 @@ exports.addEvent = function(req, res){
 				amount = 2;
 			}
 		}else{
-			amount = req.body.eventAmount;
+			amount = req.body.eventAmount ? req.body.eventAmount : 0;
 		}
 		
-		baby.events.push({date: new Date(), 
+		var date = new Date()
+		if(req.body.eventDate !== ''){
+			date = req.body.eventDate;
+		}
+		
+		baby.events.push({date: date, 
 											eventType: req.body.eventType, 
 											eventClass: req.body.eventClass, 
 											eventAmount: amount, 
