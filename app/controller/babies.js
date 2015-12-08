@@ -1,5 +1,5 @@
 var Baby = require('../model/baby');
-var moment = require('moment');
+var moment = require('moment-timezone');
 
 exports.listBabies = function(req, res){
 	Baby.fetchByUser(req.user.id, function(data){
@@ -39,9 +39,9 @@ exports.addEvent = function(req, res){
 			amount = req.body.eventAmount ? req.body.eventAmount : 0;
 		}
 		
-		var date = new Date()
+		var date = moment(new Date()).tz('Europe/Madrid').format()
 		if(req.body.eventDate !== ''){
-			date = req.body.eventDate;
+			date = moment(req.body.eventDate).tz('Europe/Madrid').format();
 		}
 		
 		baby.events.push({date: date, 
