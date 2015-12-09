@@ -27,4 +27,12 @@ babySchema.statics.fetchById = function (babyId, callback){
 	});
 }
 
+babySchema.statics.deleteEvent = function (eventId){
+	this.update({},{$pull: {events: {_id: eventId}}}).exec(function(err, baby){
+		if(err){
+			console.log(err);
+		}
+	});	
+};
+
 module.exports = mongoose.model('Baby', babySchema);

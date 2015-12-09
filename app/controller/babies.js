@@ -59,3 +59,9 @@ exports.addEvent = function(req, res){
 		res.redirect(302, '/babies');
 	});
 }
+
+exports.deleteEvent = function(req, res){
+	Baby.deleteEvent(req.body.eventId);
+		
+	res.redirect(301, '/babies');
+}
