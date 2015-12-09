@@ -46,8 +46,8 @@
 	<td><%= moment(event.date).tz('Europe/Madrid').format('DD/MM/YYYY HH:mm') %></td>
 	<td><%= event.comment %></td>
 	<td>
-		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
-			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar
+		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" title="Borrar evento">
+			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 		</button>
 		<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 			<form action="/babies/deleteEvent" method="post">
