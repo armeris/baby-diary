@@ -73,7 +73,7 @@ $(function(){
 		$("input[name=eventAmount]").val($(this).val());
 	});
 	
-	$('#datetimePicker').datetimepicker({format: 'HH:mm DD/MM/YYYY', defaultDate: new Date(), useCurrent: true, sideBySide: true, locale: 'es', allowInputToggle: true, widgetPositioning: {horizontal: 'right', vertical: 'auto'}});
+	$('#datetimePicker').datetimepicker({format: 'HH:mm DD/MM/YYYY', defaultDate: new Date(), useCurrent: true, sideBySide: true, locale: 'es', focusOnShow: false, widgetPositioning: {horizontal: 'right', vertical: 'auto'}});
 	$('#datetimePicker').on('dp.change', function(evt){
 		$('input[name=eventDate]').val(evt.date._d);
 	});

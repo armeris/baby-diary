@@ -92,6 +92,10 @@ module.exports = function(app, passport){
 	
 	app.post('/babies/addEvent', isLoggedIn, babies.addEvent);
 	
+	app.post('/babies/addEvent', isLoggedIn, babies.addEvent);
+	
+	app.post('/babies/deleteEvent', isLoggedIn, babies.deleteEvent);
+	
 	function isLoggedIn(req, res, next){
 		if(req.isAuthenticated()){
 			return next();

@@ -19,7 +19,7 @@
 					<ul class="dropdown-menu">
 						<% if (babies && babies.length > 0) { %>
 							<% for(var i=0; i < babies.length; i++) { %>
-								<li><a href="#"><%= babies[i].name %></a></li>
+								<li><a href="/babies/detail/<%= babies[i]._id%>"><%= babies[i].name %></a></li>
 							<% } %>
 						<% } %>
 						<li role="separator" class="divider"></li>
