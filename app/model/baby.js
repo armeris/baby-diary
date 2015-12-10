@@ -27,11 +27,23 @@ babySchema.statics.fetchById = function (babyId, callback){
 	});
 }
 
-babySchema.statics.deleteEvent = function (eventId){
-	this.update({},{$pull: {events: {_id: eventId}}}).exec(function(err, baby){
+babySchema.statics.deleteEvent = function (babyId, eventId){
+	this.findOne({_id: babyId}, function(err, baby){
 		if(err){
 			console.log(err);
 		}
+		
+		baby.events.filter(function(item){
+			return(item.id === eventId);
+		}).forEach(function(event){
+			baby.events.remove(event);
+		});
+		
+		baby.save(function(err){
+			if(err){
+				console.log(err);
+			}
+		});
 	});	
 };
 
