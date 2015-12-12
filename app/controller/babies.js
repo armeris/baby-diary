@@ -65,3 +65,11 @@ exports.deleteEvent = function(req, res){
 		
 	res.redirect(301, '/babies');
 }
+
+exports.details = function(req, res){
+	Baby.findById(req.params.id, function(err, baby){
+		if(err){
+			console.log(err);
+		}
+	});
+}
