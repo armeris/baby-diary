@@ -56,7 +56,11 @@ exports.addEvent = function(req, res){
 			}
 		});
 		
-		res.redirect(302, '/babies');
+		if(req.headers.referer.match('/detail/')) {
+			res.redirect(302, '/babies/detail/' + req.body.babyId);
+		} else {
+			res.redirect(302, '/babies');
+		}
 	});
 }
 
@@ -67,9 +71,14 @@ exports.deleteEvent = function(req, res){
 }
 
 exports.details = function(req, res){
+	var babies = Baby.fetchByUser(req.user.id, function(babyList){
+		babies = babyList;
+	});
 	Baby.findById(req.params.id, function(err, baby){
 		if(err){
 			console.log(err);
 		}
+		
+		res.render('baby/details',{baby:baby, user: req.user, moment: moment, babies: babies});
 	});
 }

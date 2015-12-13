@@ -22,11 +22,8 @@
 <div class="container">
 		<% include ../partials/topMenu %>
 		
-		<% include ../partials/eventSelector %>
+		<%- include('../partials/eventSelector', {baby: null}); -%>
 		
-		<% for(var i=0; i<babies.length; i++){ %>
-			<%- include('../partials/babyEvents', {baby: babies[i]}); -%>
-		<% } %>
 </div>
 </body>
 </html>

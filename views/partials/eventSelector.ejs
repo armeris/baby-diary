@@ -2,12 +2,14 @@
 	<div class="jumbotron startEventCreation" style="border:4px dashed darkgrey;padding-right:0px;">
 		<form name="addEvent" action="/babies/addEvent" method="post">
 			<h1 style="text-align: center;"><a id="addEvent" style="text-decoration: none; color: black;" href="#">+ Añadir evento</a></h1>
+			<% if (!baby) { %>
 			<div class="group-selector baby-selector line1">
 				<% for(var i=0; i<babies.length; i++) { %>
 				<div class="selector baby-box" data-field="babyId" data-type="<%= babies[i]._id%>"><%= babies[i].name %></div>
 				<% } %>
 			</div>
 			<div class="clearer"></div>
+			<% } %>
 			<div class="group-selector after-baby line2">
 				<div class="selector food-box" data-field="eventType" data-type="food">Comida</div>
 				<div class="selector diaper-box" data-field="eventType" data-type="diaper">Pañales</div>
@@ -76,7 +78,11 @@
 			<div style="clear: both;"></div>
 		</div>
 		
-		<input type="hidden" name="babyId"/>
+		<% if (baby) { %>
+			<input type="hidden" name="babyId" value="<%= baby.id %>"/>
+		<% } else { %>
+			<input type="hidden" name="babyId"/>
+		<% } %>
 		<input type="hidden" name="eventType"/>
 		<input type="hidden" name="eventClass"/>
 		<input type="hidden" name="eventAmount"/>
