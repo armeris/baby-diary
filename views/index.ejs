@@ -1,42 +1,159 @@
-<!doctype html>
-<html>
-<head>
-    <title>Diario bebé</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-		<script src="/js/baby-diary.js"></script>
-    <style>
-        body        { padding-top:80px; }
-    </style>
-</head>
-<body>
-<div class="container-fluid">
+<!DOCTYPE html>
+<html lang="en">
 
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Rubén Salinas">
+
+	<title>La agenda del bebé</title>
+
+	<!-- Bootstrap Core CSS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+
+	<!-- Custom CSS -->
+	<link href="/css/grayscale.css" rel="stylesheet">
+
+	<!-- Custom Fonts -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand page-scroll" href="#page-top">
+					<i class="fa fa-play-circle"></i> La agenda del bebé
+				</a>
+			</div>
+
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
+			<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+				<ul class="nav navbar-nav">
+					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+					<li class="hidden">
+						<a href="#page-top"></a>
+					</li>
 					<li>
-						<div class="btn-group" role="group" aria-label="...">
 							<button type="button" name="googleAuth" class="btn btn-danger navbar-btn"><span class="fa fa-google-plus"></span> Google</button>
 							<button type="button" name="facebookAuth" class="btn btn-primary navbar-btn"><span class="fa fa-user"></span> Facebook</button>
 							<button type="button" name="signin" class="btn btn-default navbar-btn"><span class="fa fa-user"></span> Login</button>
 							<button type="button" name="signup" class="btn btn-default navbar-btn"><span class="fa fa-user"></span> Registrarse</button>
-						</div>
 					</li>
-					<!--li><button type="button" name="signup" class="btn btn-default navbar-btn"><span class="fa fa-user"></span> Sign up</button></li>
-					<li><button type="button" name="signin" class="btn btn-default navbar-btn"><span class="fa fa-user"></span> Sign in</button></li-->
+					<li>
+						<a class="page-scroll" href="#about">Sobre...</a>
+					</li>
+					<li>
+						<a class="page-scroll" href="#contact">Contacto</a>
+					</li>
 				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
 	</nav>
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Diario bebé</h1>
-    </div>
 
-</div>
+	<!-- Intro Header -->
+	<header class="intro">
+		<div class="intro-body">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<h1 class="brand-heading">La agenda del bebé</h1>
+						<p class="intro-text">Una web donde podrás guardar y visualizar toda la información sobre tu bebé.</p>
+						<a href="#about" class="btn btn-circle page-scroll">
+							<i class="fa fa-angle-double-down animated"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- About Section -->
+	<section id="about" class="container content-section text-center" style="padding-top: 200px;">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+				<a href="#page-top" class="btn btn-circle page-scroll">
+					<i class="fa fa-angle-double-up animated"></i>
+				</a>
+				<h2 style="margin-top: 50px;">Sobre La agenda del bebé</h2>
+				<p>La agenda del bebé es una aplicación web donde podrás guardar todos los datos de tu bebé, cuándo y cuánto ha comido, 
+				cuando le has cambiado el pañal y hasta cuando ha tomado su medicina.</p>
+				<p>Además podrás seguir todos los datos a través de gráficas donde podrás ver la evolución de tu bebé.</p>
+				<a href="#contact" class="btn btn-circle page-scroll">
+					<i class="fa fa-angle-double-down animated"></i>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+	<section id="contact" class="container content-section text-center" style="padding-top: 200px;">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+				<a href="#about" class="btn btn-circle page-scroll">
+					<i class="fa fa-angle-double-up animated"></i>
+				</a>
+				<h2 style="margin-top: 50px;">Contact Start Bootstrap</h2>
+				<p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
+				<p><a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a>
+				</p>
+				<ul class="list-inline banner-social-buttons">
+					<li>
+						<a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+					</li>
+					<li>
+						<a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+					</li>
+					<li>
+						<a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer>
+			<div class="container text-center">
+					<p>Copyright &copy; La agenda del bebé 2015</p>
+			</div>
+	</footer>
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	
+	<!-- Bootstrap Core JavaScript -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="/js/jquery.easing.min.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="/js/grayscale.js"></script>
+	
+	<!-- App JavaScript -->
+	<script src="/js/baby-diary.js"></script>
+
 </body>
+
 </html>
