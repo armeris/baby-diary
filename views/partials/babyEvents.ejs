@@ -1,23 +1,17 @@
 <% if(baby.events.length > 0) { %>
 	<div class="baby-container">
 		<h3><%= baby.name %></h3>
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Tipo de evento</th>
-						<th>Evento</th>
-						<th>Cantidad</th>
-						<th>Hora</th>
-						<th>Comentarios</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% for (var j=0; j<baby.events.length; j++){ %>
-						<%- include('babyEvent',{event: baby.events.sort(function(a,b){return b.date - a.date;})[j]}); -%>
-					<% } %>
-				</tbody>
-			</table>
+		<ul class="nav nav-tabs nav-justified">
+			<li role="presentation"><a href="#todo" aria-controls="todo" role="tab" data-toggle="tab">Todo</a></li>
+			<li role="presentation"><a href="#comida" aria-controls="comida" role="tab" data-toggle="tab">Comida</a></li>
+			<li role="presentation"><a href="#panales" aria-controls="panales" role="tab" data-toggle="tab">Pañales</a></li>
+			<li role="presentation"><a href="#otros" aria-controls="otros" role="tab" data-toggle="tab">Otros</a></li>
+		</ul>
+		<div class="tab-content">
+			<%- include('babyEventsTab',{type: 'todo', withType: true, eventList: baby.events.sort(function(a,b){return b.date - a.date;})}); -%>
+			<%- include('babyEventsTab',{type: 'comida', withType: true, eventList: baby.events.filter(function(evt){return (evt.eventType === 'food')}).sort(function(a,b){return b.date - a.date;})}); -%>
+			<%- include('babyEventsTab',{type: 'panales', withType: true, eventList: baby.events.filter(function(evt){return (evt.eventType === 'diaper')}).sort(function(a,b){return b.date - a.date;})}); -%>
+			<%- include('babyEventsTab',{type: 'otros', withType: true, eventList: baby.events.filter(function(evt){return (evt.eventType === 'others')}).sort(function(a,b){return b.date - a.date;})}); -%>
 		</div>
 	</div>
 <% } %>

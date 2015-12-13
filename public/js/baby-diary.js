@@ -17,7 +17,11 @@ $(function(){
 	
 	$('a#addEvent').click(function(){
 		$('div.jumbotron.startEventCreation h1').toggle();
-		$('div.jumbotron.startEventCreation div.baby-box').toggle();
+		if(location.href.indexOf('/detail/') === -1){
+			$('div.jumbotron.startEventCreation div.baby-box').toggle();
+		}else{
+			$('div.jumbotron.startEventCreation div.after-baby').children().toggle();
+		}
 		return false;
 	});
 	
@@ -77,4 +81,6 @@ $(function(){
 	$('#datetimePicker').on('dp.change', function(evt){
 		$('input[name=eventDate]').val(evt.date._d);
 	});
+	
+	$('ul.nav-tabs a[aria-controls=todo]').tab('show');
 });

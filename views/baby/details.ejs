@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Lista de bebés</title>
+    <title><%= baby.name %></title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -20,10 +20,9 @@
 </head>
 <body>
 <div class="container">
-	<% include ../partials/topMenu %>
-	
-	<%- include('../partials/eventSelector', {baby: null}); -%>
-		
+	<%- include('../partials/topMenu', {user: user}); -%>
+	<%- include('../partials/eventSelector', {baby: baby}); -%>
+	<%- include('../partials/babyEvents', {baby: baby}); -%>
 </div>
 </body>
 </html>

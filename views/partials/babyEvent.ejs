@@ -1,10 +1,12 @@
 <tr>
-	<% if(event.eventType === 'food'){ %>
-		<td>Comida</td>
-	<% } else if (event.eventType === 'diaper') { %>
-		<td>Pañales</td>
-	<% } else if (event.eventType === 'others') { %>
-		<td>Otros</td>
+	<% if (withType) { %>
+		<% if(event.eventType === 'food'){ %>
+			<td>Comida</td>
+		<% } else if (event.eventType === 'diaper') { %>
+			<td>Pañales</td>
+		<% } else if (event.eventType === 'others') { %>
+			<td>Otros</td>
+		<% } %>
 	<% } %>
 	<% if(event.eventClass === 'boob'){ %>
 		<td>Teta</td>
