@@ -9,9 +9,9 @@
 		</ul>
 		<div class="tab-content">
 			<%- include('babyEventsTab',{type: 'todo', withType: true, eventList: baby.events.sort(function(a,b){return b.date - a.date;})}); -%>
-			<%- include('babyEventsTab',{type: 'comida', withType: true, eventList: baby.events.filter(function(evt){return (evt.eventType === 'food')}).sort(function(a,b){return b.date - a.date;})}); -%>
-			<%- include('babyEventsTab',{type: 'panales', withType: true, eventList: baby.events.filter(function(evt){return (evt.eventType === 'diaper')}).sort(function(a,b){return b.date - a.date;})}); -%>
-			<%- include('babyEventsTab',{type: 'otros', withType: true, eventList: baby.events.filter(function(evt){return (evt.eventType === 'others')}).sort(function(a,b){return b.date - a.date;})}); -%>
+			<%- include('babyEventsTab',{type: 'comida', withType: false, eventList: baby.events.filter(function(evt){return (evt.eventType === 'food')}).sort(function(a,b){return b.date - a.date;})}); -%>
+			<%- include('babyEventsTab',{type: 'panales', withType: false, eventList: baby.events.filter(function(evt){return (evt.eventType === 'diaper')}).sort(function(a,b){return b.date - a.date;})}); -%>
+			<%- include('babyEventsTab',{type: 'otros', withType: false, eventList: baby.events.filter(function(evt){return (evt.eventType === 'others')}).sort(function(a,b){return b.date - a.date;})}); -%>
 		</div>
 	</div>
 <% } %>

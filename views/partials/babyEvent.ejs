@@ -1,4 +1,5 @@
 <tr>
+	<td><%= moment(event.date).tz('Europe/Madrid').format('DD/MM/YYYY HH:mm') %></td>
 	<% if (withType) { %>
 		<% if(event.eventType === 'food'){ %>
 			<td>Comida</td>
@@ -45,7 +46,6 @@
 			&nbsp;
 		<% } %>
 	</td>
-	<td><%= moment(event.date).tz('Europe/Madrid').format('DD/MM/YYYY HH:mm') %></td>
 	<td><%= event.comment %></td>
 	<td>
 		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal_<%= event.id %>" title="Borrar evento">
