@@ -21,6 +21,20 @@
 <body>
 <div class="container">
 	<%- include('../partials/topMenu', {user: user}); -%>
+	
+	<% if (messages.info) { %>
+		<div class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<%= messages.info %>
+		</div>
+	<% } %>
+	<% if (messages.error) { %>
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<%= messages.error %>
+		</div>
+	<% } %>
+	
 	<%- include('../partials/eventSelector', {baby: baby}); -%>
 	<%- include('../partials/babyEvents', {baby: baby}); -%>
 </div>

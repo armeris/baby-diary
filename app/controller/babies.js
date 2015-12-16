@@ -52,9 +52,11 @@ exports.addEvent = function(req, res){
 		});
 		baby.save(function(err){
 			if(err){
-				console.log(err);
+				req.flash('error', '¡Error añadiendo evento!');
 			}
 		});
+		
+		req.flash('info','¡Evento añadido correctamente!');
 		
 		if(req.headers.referer.match('/detail/')) {
 			res.redirect(302, '/babies/detail/' + req.body.babyId);
