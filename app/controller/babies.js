@@ -52,7 +52,7 @@ exports.addEvent = function(req, res){
 		});
 		baby.save(function(err){
 			if(err){
-				req.flash('error',err);
+				req.flash('error', '¡Error añadiendo evento!');
 			}
 		});
 		
