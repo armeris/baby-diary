@@ -369,6 +369,9 @@ img::-moz-selection {
     background: 0 0;
 }
 
+.navbar-toggle {
+	color: #42dca3;
+}
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
