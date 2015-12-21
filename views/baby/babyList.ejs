@@ -14,14 +14,40 @@
   	<link rel="stylesheet" href="/js/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" href="/css/baby-diary.css"></link>
 		<link rel="stylesheet" href="/css/bootstrap-slider.css"></link>
+		
+		<script type="text/javascript" src="/js/d3.min.js""></script>
+		<script type="text/javascript" src="/js/nv.d3.min.js""></script>
+		<link rel="stylesheet" href="/css/nv.d3.css"></link>
     <style>
         body        { padding-top:80px; }
+				
+				.discreteBar {
+					fill: steelblue;
+				}
+				
+				.bar:hover {
+					fill: brown;
+				}
+				
+				.axis {
+					font: 10px sans-serif;
+				}
+				
+				.axis path,
+				.axis line {
+					fill: none;
+					stroke: #000;
+					shape-rendering: crispEdges;
+				}
+				
+				.x.axis path {
+					display: none;
+				}
     </style>
 </head>
 <body>
 <div class="container">
 	<% include ../partials/topMenu %>
-	
 	<% if (messages.info) { %>
 		<div class="alert alert-success alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -37,6 +63,36 @@
 	
 	<%- include('../partials/eventSelector', {baby: null}); -%>
 		
+	<div id="chart" style="width:600px;height:300px;">
+		<h3 class="chart-title"></h3>
+		<svg></svg>
+	</div>
 </div>
+<script>
+	$(function(){
+		var result = $.get('/babies/getAggregatedData');
+
+		result.success(function(data){
+			$("#chart h3.chart-title").text(data[0].key);
+			nv.addGraph(function() {
+				var chart = nv.models.discreteBarChart()
+						.x(function(d) { return d.label })    //Specify the data accessors.
+						.y(function(d) { return d.value })
+						.staggerLabels(false)    //Too many bars and not enough room? Try staggering labels.
+						.tooltips(false)        //Don't show tooltips
+						.showValues(false)       //...instead, show the bar value right on top of each bar.
+						;
+
+				d3.select('#chart svg')
+						.datum(data)
+						.call(chart);
+			
+				nv.utils.windowResize(chart.update);
+			
+				return chart;
+			});
+		});
+	});
+</script>
 </body>
 </html>

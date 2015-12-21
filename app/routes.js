@@ -98,6 +98,8 @@ module.exports = function(app, passport){
 	
 	app.get('/babies/detail/:id', isLoggedIn, babies.details);
 	
+	app.get('/babies/getAggregatedData', isLoggedIn, babies.getAggregatedData);
+	
 	function isLoggedIn(req, res, next){
 		if(req.isAuthenticated()){
 			return next();
