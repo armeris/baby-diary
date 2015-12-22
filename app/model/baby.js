@@ -10,10 +10,13 @@ var babySchema = mongoose.Schema({
 
 babySchema.statics.fetchByUser = function (userId, callback){
 	this.find().exec(function(err, babies){
+		if(err){
+			console.log(err);
+		}
 		var myBabies = [];
 		babies.forEach(function(baby){
 			if(baby.owners.indexOf(userId) != -1){
-				myBabies[myBabies.length] =baby;
+				myBabies[myBabies.length] = baby;
 			}
 		});
 		return callback(myBabies);
@@ -49,7 +52,7 @@ babySchema.statics.aggregatedData = function(babyId, callback){
 		_id: babyId
 	}
 	this.mapReduce(functions, function(err, results){
-		callback(err,results);
+		return callback(err,results);
 	});
 }
 

@@ -1,42 +1,66 @@
 var Baby = require('../model/baby');
 var moment = require('moment-timezone');
+var async = require('async');
 
 exports.getAggregatedData = function(req, res){
-	Baby.fetchByUser(req.user.id, function(err, babies){
+	/*
+	var a = function(callback){
+		console.log('a');
+		callback(null,'a');
+	}
+	var b = function(callback){
+		console.log('b');
+		callback(null,'b');
+	}
+	
+	var functions = [];
+	functions.push(a);
+	functions.push(b);
+	
+	async.parallel(functions, function(err, results){
 		if(err){
+			console.log('ERROR');
 			console.log(err);
 		}
-		
+		console.log('FINISHED!!!');
+		console.log(results);
+	});
+	*/
+	Baby.fetchByUser(req.user.id, function(babies){
+		var asyncTasks = [];
 		babies.forEach(function(baby){
-			Baby.aggregatedData(baby.id, function(err, results){
-				var processedData = {};
-				var key = '';
-				if(results[0]._id.event === 'bottle'){
-					key += 'Biberón de ';
-				}else if(results[0]._id.event === 'boob'){
-					key += 'Teta de ';
-				}else if(results[0]._id.event === 'pee'){
-					key += 'Pis de ';
-				}else if(results[0]._id.event === 'poo'){
-					key += 'Caca de ';	
-				}
-				processedData.key = key + results[0]._id.name;
-				processedData.values = [];
-				results.forEach(function(item){
-					if(item._id.event === 'bottle'){
-						processedData.values.push({label:item._id.date,value:item.value});
-					} 
-				});
-				
-				processedData.values.sort(function(a,b){
-					return (moment(a.label,"DD/MM/YYYY") > moment(b.label,"DD/MM/YYYY"));
-				});
-				
-				var result = [];
-				result.push(processedData)
-				
-				res.json(result);
+			asyncTasks.push(function(callback){
+				Baby.aggregatedData(baby.id, function(err, results){
+					var processedData = {};
+					var key = '';
+					if(results[0]._id.event === 'bottle'){
+						key += 'Biberón de ';
+					}else if(results[0]._id.event === 'boob'){
+						key += 'Teta de ';
+					}else if(results[0]._id.event === 'pee'){
+						key += 'Pis de ';
+					}else if(results[0]._id.event === 'poo'){
+						key += 'Caca de ';	
+					}
+					processedData.key = key + results[0]._id.name;
+					processedData.values = [];
+					results.forEach(function(item){
+						if(item._id.event === 'bottle'){
+							processedData.values.push({label:item._id.date,value:item.value});
+						} 
+					});
+					
+					processedData.values.sort(function(a,b){
+						return (moment(a.label,"DD/MM/YYYY") > moment(b.label,"DD/MM/YYYY"));
+					});
+					
+					callback(null, processedData);
+				});	
 			});
+		});
+		
+		async.parallel(asyncTasks, function(err, result){
+			res.json(result);
 		});
 	});
 }
