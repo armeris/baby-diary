@@ -37,3 +37,9 @@ div.group-selector{
 div.clearer{
 	clear: both;
 }
+
+div.chart{
+	width:550px;
+	height:300px;
+	float: left;
+}
