@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
+var Baby = require('./baby');
 
 var userSchema = mongoose.Schema({
 	local: {
@@ -19,6 +20,11 @@ var userSchema = mongoose.Schema({
 		name: String
 	}
 });
+
+userSchema.methods.isOwner = function(babyId){
+	var user = this;
+	return Baby.fetchById(babyId);
+}
 
 userSchema.methods.generateHash = function(password){
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
