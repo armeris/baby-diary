@@ -92,17 +92,32 @@ module.exports = function(app, passport){
 	
 	app.post('/babies/addEvent', isLoggedIn, babies.addEvent);
 	
-	app.post('/babies/addEvent', isLoggedIn, babies.addEvent);
-	
 	app.post('/babies/deleteEvent', isLoggedIn, babies.deleteEvent);
 	
-	app.get('/babies/detail/:id', isLoggedIn, babies.details);
+	app.get('/babies/detail/:id', isLoggerInAndIsOwner, babies.details);
 	
 	app.get('/babies/getAggregatedData', isLoggedIn, babies.getAggregatedData);
 	
 	function isLoggedIn(req, res, next){
 		if(req.isAuthenticated()){
 			return next();
+		}else{
+			res.redirect('/');
+		}
+	}
+	
+	function isLoggerInAndIsOwner(req, res, next){
+		if(req.isAuthenticated()){
+			var promise = req.user.isOwner(req.params.id);
+			promise.then(function(baby){
+				if(baby && (baby.owners.indexOf(req.user.id) !== -1)){
+					return next();
+				}else{
+					res.redirect('/');
+				}
+			},function(){
+				res.redirect('/');
+			});
 		}else{
 			res.redirect('/');
 		}

@@ -23,10 +23,10 @@ babySchema.statics.fetchByUser = function (userId, callback){
 	});
 }
 
-babySchema.statics.fetchById = function (babyId, callback){
-	this.findOne({_id:babyId}).exec(function(err, baby){
-		if(!err){
-			callback(baby);
+babySchema.statics.fetchById = function (babyId){
+	return this.findOne({_id:babyId}).exec(function(err, baby){
+		if(err){
+			console.log(err);
 		}
 	});
 }
