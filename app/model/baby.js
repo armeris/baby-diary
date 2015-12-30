@@ -38,9 +38,10 @@ babySchema.statics.weekAggregatedData = function(babyId, callback){
 		today.setHours(0,0,0,0);
 		var week = 60*60*24*7*1000;
     for(var i=0; i<this.events.length; i++){
-			var diff = today.getTime() - this.events[i].date.getTime(); 
+			var eventTime = this.events[i].date.getTime() + (this.events[i].date.getTimezoneOffset() * 60000);
+			var diff = today.getTime() - eventTime; 
 			if(diff <= week){		
-				var key = {id:this.id,name:this.name,event:this.events[i].eventClass, date: this.events[i].date.getDate()+'/'+(this.events[i].date.getMonth()+1)+'/'+this.events[i].date.getFullYear()};
+				var key = {id:this.id,name:this.name,event:this.events[i].eventClass, date: new Date(eventTime).getDate()+'/'+(new Date(eventTime).getMonth()+1)+'/'+new Date(eventTime).getFullYear()};
 				var value = this.events[i].eventAmount;
 				emit(key,value);
 			}
