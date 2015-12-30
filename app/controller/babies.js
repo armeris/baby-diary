@@ -3,58 +3,39 @@ var moment = require('moment-timezone');
 var async = require('async');
 
 exports.getAggregatedData = function(req, res){
-	/*
-	var a = function(callback){
-		console.log('a');
-		callback(null,'a');
-	}
-	var b = function(callback){
-		console.log('b');
-		callback(null,'b');
-	}
-	
-	var functions = [];
-	functions.push(a);
-	functions.push(b);
-	
-	async.parallel(functions, function(err, results){
-		if(err){
-			console.log('ERROR');
-			console.log(err);
-		}
-		console.log('FINISHED!!!');
-		console.log(results);
-	});
-	*/
 	Baby.fetchByUser(req.user.id, function(babies){
 		var asyncTasks = [];
 		babies.forEach(function(baby){
 			asyncTasks.push(function(callback){
-				Baby.aggregatedData(baby.id, function(err, results){
-					var processedData = {};
-					var key = '';
-					if(results[0]._id.event === 'bottle'){
-						key += 'Biberón de ';
-					}else if(results[0]._id.event === 'boob'){
-						key += 'Teta de ';
-					}else if(results[0]._id.event === 'pee'){
-						key += 'Pis de ';
-					}else if(results[0]._id.event === 'poo'){
-						key += 'Caca de ';	
+				Baby.weekAggregatedData(baby.id, function(err, results){
+					if(results[0]){
+						var processedData = {};
+						var key = '';
+						if(results[0]._id.event === 'bottle'){
+							key += 'Biberón de ';
+						}else if(results[0]._id.event === 'boob'){
+							key += 'Teta de ';
+						}else if(results[0]._id.event === 'pee'){
+							key += 'Pis de ';
+						}else if(results[0]._id.event === 'poo'){
+							key += 'Caca de ';	
+						}
+						processedData.key = key + results[0]._id.name;
+						processedData.values = [];
+						results.forEach(function(item){
+							if(item._id.event === 'bottle'){
+								processedData.values.push({label:item._id.date,value:item.value});
+							} 
+						});
+						
+						processedData.values.sort(function(a,b){
+							return (moment(a.label,"DD/MM/YYYY") > moment(b.label,"DD/MM/YYYY"));
+						});
+						
+						callback(null, processedData);
+					}else{
+						callback(null, null);
 					}
-					processedData.key = key + results[0]._id.name;
-					processedData.values = [];
-					results.forEach(function(item){
-						if(item._id.event === 'bottle'){
-							processedData.values.push({label:item._id.date,value:item.value});
-						} 
-					});
-					
-					processedData.values.sort(function(a,b){
-						return (moment(a.label,"DD/MM/YYYY") > moment(b.label,"DD/MM/YYYY"));
-					});
-					
-					callback(null, processedData);
 				});	
 			});
 		});
@@ -89,7 +70,9 @@ exports.add = function(req, res){
 }
 
 exports.addEvent = function(req, res){
-	Baby.fetchById(req.body.babyId, function(baby){
+	var babyPromise = Baby.fetchById(req.body.babyId);
+	
+	babyPromise.then(function(baby){
 		var amount = 0;
 		if(req.body.eventType === 'diaper'){
 			if(req.body.eventAmount === 'little'){

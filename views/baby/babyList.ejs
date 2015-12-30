@@ -76,30 +76,35 @@
 		var result = $.get('/babies/getAggregatedData');
 
 		result.success(function(data){
-			$('.chart svg').html('');
-			$(data).each(function(i,graph){
-				var datum = [graph];
-				var elem = $(".chart h3.chart-title")[i]; 
-				$(elem).text(graph.key);
-				
-				nv.addGraph(function() {
-					var chart = nv.models.discreteBarChart()
-							.x(function(d) { return d.label })    //Specify the data accessors.
-							.y(function(d) { return d.value })
-							.staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-							.tooltips(false)        //Don't show tooltips
-							.showValues(false)       //...instead, show the bar value right on top of each bar.
-							;
+			if(data && data[0]){
+				$('.chart svg').html('');
+				$(data).each(function(i,graph){
+					var datum = [graph];
+					var elem = $(".chart h3.chart-title")[i]; 
+					$(elem).text(graph.key);
+					
+					nv.addGraph(function() {
+						var chart = nv.models.discreteBarChart()
+								.x(function(d) { return d.label })    //Specify the data accessors.
+								.y(function(d) { return d.value })
+								.staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+								.tooltips(false)        //Don't show tooltips
+								.showValues(false)       //...instead, show the bar value right on top of each bar.
+								;
 
-					d3.select(d3.selectAll('.chart svg')[0][i])
-							.datum(datum)
-							.call(chart);
-				
-					nv.utils.windowResize(chart.update);
-				
-					return chart;
+						d3.select(d3.selectAll('.chart svg')[0][i])
+								.datum(datum)
+								.call(chart);
+					
+						nv.utils.windowResize(chart.update);
+					
+						return chart;
+					});
 				});
-			});
+			}else{
+				$('.chart h3').text('No hay datos en la última semana.');
+				$('.chart svg').html('');
+			}
 		});
 	});
 </script>
