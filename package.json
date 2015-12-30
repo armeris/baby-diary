@@ -10,6 +10,7 @@
     "express": "~4.0.0",
     "express-flash": "git://github.com/RGBboy/express-flash.git",
     "express-session": "~1.0.0",
+		"connect-mongo": "^1.1.0",
     "method-override": "~1.0.0",
     "moment": "^2.10.6",
     "moment-timezone": "^0.4.1",

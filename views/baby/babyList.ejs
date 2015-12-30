@@ -76,9 +76,9 @@
 		var result = $.get('/babies/getAggregatedData');
 
 		result.success(function(data){
-			if(data && data[0]){
-				$('.chart svg').html('');
-				$(data).each(function(i,graph){
+			$('.chart svg').html('');
+			$(data).each(function(i,graph){
+				if(graph){
 					var datum = [graph];
 					var elem = $(".chart h3.chart-title")[i]; 
 					$(elem).text(graph.key);
@@ -100,11 +100,11 @@
 					
 						return chart;
 					});
-				});
-			}else{
-				$('.chart h3').text('No hay datos en la última semana.');
-				$('.chart svg').html('');
-			}
+				}else{
+					var elem = $(".chart h3.chart-title")[i];
+					$(elem).text('No hay datos de la última semana.');
+				}
+			});
 		});
 	});
 </script>
