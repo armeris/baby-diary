@@ -31,13 +31,19 @@ babySchema.statics.fetchById = function (babyId){
 	});
 }
 
-babySchema.statics.aggregatedData = function(babyId, callback){
+babySchema.statics.weekAggregatedData = function(babyId, callback){
 	var functions = {};
 	functions.map = function(){
-    for(var i=0; i<this.events.length; i++){		
-			var key = {id:this.id,name:this.name,event:this.events[i].eventClass, date: this.events[i].date.getDate()+'/'+this.events[i].date.getMonth()+'/'+this.events[i].date.getFullYear()};
-			var value = this.events[i].eventAmount;
-			emit(key,value);
+		var today = new Date();
+		today.setHours(0,0,0,0);
+		var week = 60*60*24*7*1000;
+    for(var i=0; i<this.events.length; i++){
+			var diff = today.getTime() - this.events[i].date.getTime(); 
+			if(diff <= week){		
+				var key = {id:this.id,name:this.name,event:this.events[i].eventClass, date: this.events[i].date.getDate()+'/'+this.events[i].date.getMonth()+'/'+this.events[i].date.getFullYear()};
+				var value = this.events[i].eventAmount;
+				emit(key,value);
+			}
     }
 	};
 	functions.reduce = function(eventType, eventAmounts){
