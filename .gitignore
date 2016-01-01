@@ -1,5 +1,3 @@
-config/database.js
-config/auth.js
 node_modules/*
 .vscode
 .DS_Store
