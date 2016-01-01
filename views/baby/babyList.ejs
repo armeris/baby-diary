@@ -73,7 +73,12 @@
 </div>
 <script>
 	$(function(){
-		var result = $.get('/babies/getAggregatedData');
+		var aWeekAgo = new Date();
+		aWeekAgo.setHours(0,0,0,0);
+		aWeekAgo = new Date(aWeekAgo.getTime() - 1000 * 60 * 60 * 24 * 7); 
+		var from = ''+aWeekAgo.getFullYear()+(aWeekAgo.getMonth()+1)+aWeekAgo.getDate();
+		var to = ''+new Date().getFullYear()+(new Date().getMonth()+1)+new Date().getDate();
+		var result = $.get('/babies/getAggregatedData?from='+from+'&to='+to);
 
 		result.success(function(data){
 			$('.chart svg').html('');

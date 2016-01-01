@@ -31,20 +31,13 @@ babySchema.statics.fetchById = function (babyId){
 	});
 }
 
-babySchema.statics.weekAggregatedData = function(babyId, callback){
+babySchema.statics.aggregatedData = function(babyId, from, to, callback){
 	var functions = {};
 	functions.map = function(){
-		var today = new Date();
-		today.setHours(0,0,0,0);
-		var week = 60*60*24*7*1000;
-    for(var i=0; i<this.events.length; i++){
-			var eventTime = this.events[i].date.getTime();
-			var diff = today.getTime() - eventTime; 
-			if(diff <= week){		
-				var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: new Date(eventTime).getDate()+'/'+(new Date(eventTime).getMonth()+1)+'/'+new Date(eventTime).getFullYear()};
+    for(var i=0; i<this.events.length; i++){		
+				var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: this.events[i].date.getDate()+'/'+(this.events[i].date.getMonth()+1)+'/'+this.events[i].date.getFullYear()};
 				var value = this.events[i].eventAmount;
 				emit(key,value);
-			}
     }
 	};
 	functions.reduce = function(eventType, eventAmounts){
@@ -59,7 +52,9 @@ babySchema.statics.weekAggregatedData = function(babyId, callback){
 		_id: babyId
 	}
 	this.mapReduce(functions, function(err, results){
-		return callback(err,results);
+		return callback(err,results.filter(function(evt){
+			return (moment(evt._id.date,'DD/MM/YYYY').isAfter(from));
+		}));
 	});
 }
 
