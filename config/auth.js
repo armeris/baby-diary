@@ -1,4 +1,4 @@
-modules.exports = {
+module.exports = {
 	'facebookAuth': {
 		'clientID': '436648999859063',
 		'clientSecret': 'ba34d955d9f46d23bd3560c876adec73',
