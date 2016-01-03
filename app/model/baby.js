@@ -59,7 +59,7 @@ babySchema.statics.aggregatedData = function(babyId, from, tz, callback){
 	this.mapReduce(functions, function(err, results){
 		if(results){
 			return callback(err,results.filter(function(evt){
-				return (moment(evt._id.date,'DD/MM/YYYY').isAfter(from));
+				return (moment(new Date(evt._id.date)).isAfter(from));
 			}));
 		}
 	});
