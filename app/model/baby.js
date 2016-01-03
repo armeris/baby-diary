@@ -34,10 +34,11 @@ babySchema.statics.fetchById = function (babyId){
 babySchema.statics.aggregatedData = function(babyId, from, to, callback){
 	var functions = {};
 	functions.map = function(){
-    for(var i=0; i<this.events.length; i++){		
-				var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: this.events[i].date.getDate()+'/'+(this.events[i].date.getMonth()+1)+'/'+this.events[i].date.getFullYear()};
-				var value = this.events[i].eventAmount;
-				emit(key,value);
+    for(var i=0; i<this.events.length; i++){
+			var eventTime = new Date(this.events[i].date - this.events[i].date.getTimezoneOffset());
+			var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: eventTime.getDate()+'/'+(eventTime.getMonth()+1)+'/'+eventTime.getFullYear()};
+			var value = this.events[i].eventAmount;
+			emit(key,value);
     }
 	};
 	functions.reduce = function(eventType, eventAmounts){
