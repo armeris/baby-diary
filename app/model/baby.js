@@ -31,11 +31,11 @@ babySchema.statics.fetchById = function (babyId){
 	});
 }
 
-babySchema.statics.aggregatedData = function(babyId, from, to, callback){
+babySchema.statics.aggregatedData = function(babyId, from, tz, callback){
 	var functions = {};
 	functions.map = function(){
     for(var i=0; i<this.events.length; i++){
-			var eventTime = new Date(this.events[i].date + (this.events[i].date.getTimezoneOffset() * 60000));
+			var eventTime = new Date(this.events[i].date + (tz * 60000));
 			var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: eventTime.getDate()+'/'+(eventTime.getMonth()+1)+'/'+eventTime.getFullYear()};
 			var value = this.events[i].eventAmount;
 			emit(key,value);
