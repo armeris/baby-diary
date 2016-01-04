@@ -121,14 +121,13 @@ exports.deleteEvent = function(req, res){
 }
 
 exports.details = function(req, res){
-	var babies = Baby.fetchByUser(req.user.id, function(babyList){
-		babies = babyList;
-	});
 	Baby.findById(req.params.id, function(err, baby){
 		if(err){
 			console.log(err);
 		}
 		
-		res.render('baby/details',{baby:baby, user: req.user, moment: moment, babies: babies});
+		Baby.fetchByUser(req.user.id, function(babyList){
+			res.render('baby/details',{baby:baby, user: req.user, moment: moment, babies: babyList});
+		});
 	});
 }
