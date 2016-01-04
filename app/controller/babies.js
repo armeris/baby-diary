@@ -117,7 +117,7 @@ exports.addEvent = function(req, res){
 exports.deleteEvent = function(req, res){
 	Baby.deleteEvent(req.body.babyId, req.body.eventId);
 		
-	res.redirect(301, '/babies');
+	res.redirect(301, '/babies/detail/' + req.body.babyId);
 }
 
 exports.details = function(req, res){

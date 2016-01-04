@@ -20,3 +20,25 @@
 		</table>
 	</div>
 </div>
+<% for (var k=0; k<eventList.length; k++){ %>
+	<div class="modal fade bs-example-modal-sm" id="myModal_<%= eventList[k].id %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<form action="/babies/deleteEvent" method="post">
+			<input type="hidden" name="eventId" value="<%= eventList[k]._id %>"/>
+			<input type="hidden" name="babyId" value="<%= baby._id %>"/>
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Confirmación</h4>
+					</div>
+					<div class="modal-body">
+						¿Estás seguro?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+						<button type="submit" class="btn btn-primary">Si</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+<% } %>
