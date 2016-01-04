@@ -36,8 +36,8 @@ babySchema.statics.aggregatedData = function(babyId, from, tz, callback){
 	functions.map = function(){
     for(var i=0; i<this.events.length; i++){
 			var eventTime = this.events[i].date;
-			eventTime.setHours(0, 0, 0, 0);
-			var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: (eventTime - (timeZone * 60000))};
+			eventTime.setHours(0,0,0,0);
+			var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: eventTime};
 			var value = this.events[i].eventAmount;
 			emit(key,value);
     }
@@ -57,11 +57,17 @@ babySchema.statics.aggregatedData = function(babyId, from, tz, callback){
 		timeZone: tz
 	}
 	this.mapReduce(functions, function(err, results){
+<<<<<<< HEAD
 		if(results){
 			return callback(err,results.filter(function(evt){
 				return (moment(new Date(evt._id.date)).isAfter(from));
 			}));
 		}
+=======
+		return callback(err,results.filter(function(evt){
+			return (moment(evt._id.date).isAfter(from));
+		}));
+>>>>>>> master
 	});
 }
 
