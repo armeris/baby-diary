@@ -57,17 +57,9 @@ babySchema.statics.aggregatedData = function(babyId, from, tz, callback){
 		timeZone: tz
 	}
 	this.mapReduce(functions, function(err, results){
-<<<<<<< HEAD
-		if(results){
-			return callback(err,results.filter(function(evt){
-				return (moment(new Date(evt._id.date)).isAfter(from));
-			}));
-		}
-=======
 		return callback(err,results.filter(function(evt){
 			return (moment(evt._id.date).isAfter(from));
 		}));
->>>>>>> master
 	});
 }
 
