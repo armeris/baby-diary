@@ -26,7 +26,7 @@ exports.getAggregatedData = function(req, res){
 						processedData.values = [];
 						results.forEach(function(item){
 							if(item._id.event === 'bottle'){
-								processedData.values.push({label:item._id.date,value:item.value});
+								processedData.values.push({label:moment(item._id.date).format('DD/MM/YYYY'),value:item.value});
 							} 
 						});
 						

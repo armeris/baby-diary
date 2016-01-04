@@ -34,10 +34,12 @@ babySchema.statics.fetchById = function (babyId){
 babySchema.statics.aggregatedData = function(babyId, from, to, callback){
 	var functions = {};
 	functions.map = function(){
-    for(var i=0; i<this.events.length; i++){		
-				var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: this.events[i].date.getDate()+'/'+(this.events[i].date.getMonth()+1)+'/'+this.events[i].date.getFullYear()};
-				var value = this.events[i].eventAmount;
-				emit(key,value);
+    for(var i=0; i<this.events.length; i++){
+			var eventTime = this.events[i].date;
+			eventTime.setHours(0,0,0,0);
+			var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: eventTime};
+			var value = this.events[i].eventAmount;
+			emit(key,value);
     }
 	};
 	functions.reduce = function(eventType, eventAmounts){
@@ -53,7 +55,7 @@ babySchema.statics.aggregatedData = function(babyId, from, to, callback){
 	}
 	this.mapReduce(functions, function(err, results){
 		return callback(err,results.filter(function(evt){
-			return (moment(evt._id.date,'DD/MM/YYYY').isAfter(from));
+			return (moment(evt._id.date).isAfter(from));
 		}));
 	});
 }
