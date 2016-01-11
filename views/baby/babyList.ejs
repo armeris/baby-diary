@@ -76,8 +76,16 @@
 		var aWeekAgo = new Date();
 		aWeekAgo.setHours(0,0,0,0);
 		aWeekAgo = new Date(aWeekAgo.getTime() - 1000 * 60 * 60 * 24 * 7); 
-		var from = ''+aWeekAgo.getFullYear()+(aWeekAgo.getMonth()+1)+aWeekAgo.getDate();
-		var to = ''+new Date().getFullYear()+(new Date().getMonth()+1)+new Date().getDate();
+		var fromYear = aWeekAgo.getFullYear();
+		var fromMonth = aWeekAgo.getMonth()+1;
+		if(fromMonth < 10){
+			fromMonth = '0' + fromMonth;
+		}
+		var fromDay = aWeekAgo.getDate();
+		if(fromDay < 10){
+			fromDay = '0' + fromDay;
+		}
+		var from = ''+fromYear+fromMonth+fromDay;
 		var result = $.get('/babies/getAggregatedData?from='+from+'&tz='+new Date().getTimezoneOffset());
 
 		result.success(function(data){
