@@ -31,7 +31,7 @@ babySchema.statics.fetchById = function (babyId){
 	});
 }
 
-babySchema.statics.aggregatedData = function(babyId, from, to, callback){
+babySchema.statics.aggregatedData = function(babyId, from, tz, callback){
 	var functions = {};
 	functions.map = function(){
     for(var i=0; i<this.events.length; i++){
@@ -51,7 +51,10 @@ babySchema.statics.aggregatedData = function(babyId, from, to, callback){
 			return total;
 	};
 	functions.query = {
-		_id: babyId
+			_id: babyId
+	}
+	functions.scope = {
+		timeZone: tz
 	}
 	this.mapReduce(functions, function(err, results){
 		return callback(err,results.filter(function(evt){

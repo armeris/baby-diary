@@ -78,7 +78,7 @@
 		aWeekAgo = new Date(aWeekAgo.getTime() - 1000 * 60 * 60 * 24 * 7); 
 		var from = ''+aWeekAgo.getFullYear()+(aWeekAgo.getMonth()+1)+aWeekAgo.getDate();
 		var to = ''+new Date().getFullYear()+(new Date().getMonth()+1)+new Date().getDate();
-		var result = $.get('/babies/getAggregatedData?from='+from+'&to='+to);
+		var result = $.get('/babies/getAggregatedData?from='+from+'&tz='+new Date().getTimezoneOffset());
 
 		result.success(function(data){
 			$('.chart svg').html('');
