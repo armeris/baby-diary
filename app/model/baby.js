@@ -36,8 +36,14 @@ babySchema.statics.aggregatedData = function(babyId, from, tz, callback){
 	functions.map = function(){
     for(var i=0; i<this.events.length; i++){
 			var eventTime = this.events[i].date;
-			eventTime.setHours(0,0,0,0);
-			var key = {id:this._id,name: this.name, event:this.events[i].eventClass, date: eventTime};
+			if(eventTime.getHours()*60 > new Date().getTimezoneOffset()){
+				eventTime.setHours(0,0,0,0);
+				eventTime.setMinutes(eventTime.getMinutes() - new Date().getTimezoneOffset() + (24*60));
+			}else{
+				eventTime.setHours(0,0,0,0);
+				eventTime.setMinutes(eventTime.getMinutes() - new Date().getTimezoneOffset());
+			}
+			var key = {id:this._id.toString(),name: this.name, event:this.events[i].eventClass, date: eventTime};
 			var value = this.events[i].eventAmount;
 			emit(key,value);
     }
