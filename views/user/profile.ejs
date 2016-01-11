@@ -22,45 +22,41 @@
 
     <div class="row">
 
-        <!-- FACEBOOK INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+			<!-- FACEBOOK INFORMATION -->
+			<div class="col-sm-6">
+				<div class="well">
+					<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
 
-                <% if (user.facebook.token) { %>
-                    <p>
-                        <strong>id</strong>: <%= user.facebook.id %><br>
-                        <strong>token</strong>: <%= user.facebook.token %><br>
-                        <strong>email</strong>: <%= user.facebook.email %><br>
-                        <strong>name</strong>: <%= user.facebook.name %>
-                    </p>
+					<% if (user.facebook.token) { %>
+						<p>
+							<strong>Nombre</strong>: <%= user.facebook.name %><br/>
+							<strong>Correo electrónico</strong>: <%= user.facebook.email %>
+						</p>
 
-                    <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-                <% } %>
-            </div>
-        </div>
+						<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
+					<% } else { %>
+						<a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+					<% } %>
+				</div>
+			</div>
         
-        <!-- GOOGLE INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google</h3>
+			<!-- GOOGLE INFORMATION -->
+			<div class="col-sm-6">
+				<div class="well">
+					<h3 class="text-danger"><span class="fa fa-google-plus"></span> Google</h3>
 
-                <% if (user.google.token) { %>
-                    <p>
-                        <strong>id</strong>: <%= user.google.id %><br>
-                        <strong>token</strong>: <%= user.google.token %><br>
-                        <strong>email</strong>: <%= user.google.email %><br>
-                        <strong>name</strong>: <%= user.google.name %>
-                    </p>
+					<% if (user.google.token) { %>
+						<p>
+							<strong>Nombre</strong>: <%= user.google.name %><br/>
+							<strong>Correo electrónico</strong>: <%= user.google.email %>
+						</p>
 
-                    <a href="/unlink/google" class="btn btn-danger">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/google" class="btn btn-danger">Connect Google</a>
-                <% } %>
-            </div>
-        </div>
+						<a href="/unlink/google" class="btn btn-danger">Unlink</a>
+					<% } else { %>
+						<a href="/connect/google" class="btn btn-danger">Connect Google</a>
+					<% } %>
+				</div>
+			</div>
 
     </div>
 
