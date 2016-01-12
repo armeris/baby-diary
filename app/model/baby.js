@@ -34,14 +34,16 @@ babySchema.statics.fetchById = function (babyId){
 babySchema.statics.aggregatedData = function(babyId, from, tz, callback){
 	var functions = {};
 	functions.map = function(){
+		const TIMEZONE_OFFSET = new Date().getTimezoneOffset();
+		const TIMEZONE_OFFSET_HOURS = TIMEZONE_OFFSET / 60;
     for(var i=0; i<this.events.length; i++){
 			var eventTime = this.events[i].date;
-			if(eventTime.getHours()*60 > new Date().getTimezoneOffset()){
+			if((((eventTime.getHours()+TIMEZONE_OFFSET_HOURS)) % 24)*60 < TIMEZONE_OFFSET){
 				eventTime.setHours(0,0,0,0);
-				eventTime.setMinutes(eventTime.getMinutes() - new Date().getTimezoneOffset() + (24*60));
+				eventTime.setMinutes(eventTime.getMinutes() - TIMEZONE_OFFSET + (24*60));
 			}else{
 				eventTime.setHours(0,0,0,0);
-				eventTime.setMinutes(eventTime.getMinutes() - new Date().getTimezoneOffset());
+				eventTime.setMinutes(eventTime.getMinutes() - TIMEZONE_OFFSET);
 			}
 			var key = {id:this._id.toString(),name: this.name, event:this.events[i].eventClass, date: eventTime};
 			var value = this.events[i].eventAmount;
