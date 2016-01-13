@@ -8,7 +8,7 @@ exports.getAggregatedData = function(req, res){
 		babies.forEach(function(baby){
 			asyncTasks.push(function(callback){
 				var from = moment(req.query.from, 'YYYYMMDD').toDate();
-				Baby.aggregatedData(baby.id, from, Number(req.query.tz), function(err, results){
+				Baby.aggregatedData(baby.id, from, req.query.tz, function(err, results){
 					if(results[0]){
 						var processedData = {};
 						var key = '';
