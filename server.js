@@ -30,7 +30,8 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 // required for passport
 app.use(session({
     secret:'oneringtorulethemalloneringtofindthem',
-		cookie:{maxAge: 3600000},
+		cookie:{maxAge: 360000000},
+
     store: new MongoStore(
         {mongooseConnection: mongoose.connection},
         function(err){
