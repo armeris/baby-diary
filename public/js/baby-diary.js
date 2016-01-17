@@ -69,6 +69,14 @@ $(function(){
 		$("input[name=eventAmount]").val($(this).val());
 	});
 	
+	$("input[name=fever-amount]").slider({
+		tooltip: 'always'
+	});
+	$("input[name=fever-amount]").on("slide", function(slideEvt) {
+		$("#fever-amount-label-number").text(slideEvt.value);
+		$("input[name=eventAmount]").val($(this).val());
+	});
+	
 	$("input[name=boob-amount]").on("change", function(slideEvt) {
 		$("#boob-amount-label-number").text(slideEvt.value.newValue);
 		$("input[name=eventAmount]").val($(this).val());

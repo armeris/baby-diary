@@ -28,6 +28,7 @@
 				<div class="selector vitamin-box" data-field="eventClass" data-type="vitamin">Vitaminas</div>
 				<div class="selector medicin-box" data-field="eventClass" data-type="medicine">Medicina</div>
 				<div class="selector vomit-box" data-field="eventClass" data-type="vomit">Vómito</div>
+				<div class="selector fever-box" data-field="eventClass" data-type="fever">Fiebre</div>
 				<div class="selector misc-box" data-field="eventClass" data-type="misc">Otros</div>
 			</div>
 			<div class="clearer"></div>
@@ -42,6 +43,15 @@
 				<div class="selector poo-amount-abox" data-field="eventAmount" data-type="much">Mucho</div>
 			</div>
 			<div style="clear:both;"></div>
+			<div class="group-selector fever line4">
+				<div class="hidden">
+					<div class="form-group">
+						<label for="fever-amount" style="margin-right:10px">Temperatura: </label>
+						<input name="fever-amount" type="text" data-slider-min="34" data-field="eventAmount" data-type="" data-slider-max="45" data-slider-step=".1" data-slider-value="34"/>
+						<span id="fever-amount-label"><span id="fever-amount-label-number">34</span> º</span>
+					</div>
+				</div>
+			</div>
 			<div class="group-selector boob line4">
 				<div class="hidden">
 					<div class="form-group">

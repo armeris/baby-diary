@@ -23,6 +23,8 @@
 		<td>Medicina</td>
 	<% } else if (event.eventClass === 'vomit') { %>
 		<td>Vómito</td>
+		<% } else if (event.eventClass === 'fever') { %>
+		<td>Fiebre</td>
 	<% } else{ %>
 		<td>Otros</td>
 	<% } %>
@@ -42,6 +44,8 @@
 					min
 				<% } else if (event.eventClass === 'bottle') { %>
 					ml
+				<% } else if (event.eventClass === 'fever') { %>
+					º
 				<% } %>
 			<% } %>
 		<% } else { %>
