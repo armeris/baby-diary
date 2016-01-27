@@ -89,6 +89,15 @@ div.minus-button:hover{
 }
 
 div.mobile-buttons{
+	display:none;
 	float:right;
 	margin-right:20px;
+}
+
+@media(max-width:768px) {
+	div.mobile-buttons{
+		display:block;
+		float:right;
+		margin-right:20px;
+	}
 }
