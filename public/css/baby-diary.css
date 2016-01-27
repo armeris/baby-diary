@@ -43,3 +43,52 @@ div.chart{
 	height:300px;
 	float: left;
 }
+
+div.plus-button{
+	background-color: #5cb85c;
+	border:2px solid white;
+	color: white;
+	width:40px;
+	height:40px;
+	line-height:30px;
+	border-radius:20px;
+	text-align:center;
+	vertical-align:middle;
+	font-weight:bold;
+	font-size:24px;
+	cursor:pointer;
+	float:left;
+}
+
+div.plus-button:hover{
+	border:2px solid white;
+	color: white;
+	background-color: #428bca;
+}
+
+div.minus-button{
+	background-color: red;
+	border:2px solid white;
+	color: white;
+	width:40px;
+	height:40px;
+	line-height:30px;
+	border-radius:20px;
+	text-align:center;
+	vertical-align:middle;
+	font-weight:bold;
+	font-size:24px;
+	cursor:pointer;
+	float:left;
+}
+
+div.minus-button:hover{
+	border:2px solid white;
+	color: white;
+	background-color: #428bca;
+}
+
+div.mobile-buttons{
+	float:right;
+	margin-right:20px;
+}

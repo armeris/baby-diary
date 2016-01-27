@@ -1,3 +1,6 @@
+var bottleSlider;
+var boobSlider;
+var feverSlider;
 $(function(){
 	$('nav.navbar button[name=signin]').click(function(){
 		location.href = '/login'
@@ -61,7 +64,7 @@ $(function(){
 		}
 	});
 	
-	$("input[name=boob-amount]").slider({
+	boobSlider = $("input[name=boob-amount]").slider({
 		tooltip: 'always'
 	});
 	$("input[name=boob-amount]").on("slide", function(slideEvt) {
@@ -69,7 +72,7 @@ $(function(){
 		$("input[name=eventAmount]").val($(this).val());
 	});
 	
-	$("input[name=fever-amount]").slider({
+	feverSlider = $("input[name=fever-amount]").slider({
 		tooltip: 'always'
 	});
 	$("input[name=fever-amount]").on("slide", function(slideEvt) {
@@ -82,7 +85,7 @@ $(function(){
 		$("input[name=eventAmount]").val($(this).val());
 	});
 	
-	$("input[name=bottle-amount]").slider({
+	bottleSlider = $("input[name=bottle-amount]").slider({
 		tooltip: 'always'
 	});
 	$("input[name=bottle-amount]").on("slide", function(slideEvt) {
@@ -101,4 +104,34 @@ $(function(){
 	});
 	
 	$('ul.nav-tabs a[aria-controls=todo]').tab('show');
+	
+	$("div.group-selector.bottle div.plus-button").click(function(){
+		bottleSlider.slider('setValue',bottleSlider.slider('getValue')+bottleSlider.slider('getAttribute','step'));
+		$("#bottle-amount-label-number").text(bottleSlider.slider('getValue'));
+	});
+	
+	$("div.group-selector.bottle div.minus-button").click(function(){
+		bottleSlider.slider('setValue',bottleSlider.slider('getValue')-bottleSlider.slider('getAttribute','step'));
+		$("#bottle-amount-label-number").text(bottleSlider.slider('getValue'));
+	});
+	
+	$("div.group-selector.boob div.plus-button").click(function(){
+		boobSlider.slider('setValue',boobSlider.slider('getValue')+boobSlider.slider('getAttribute','step'));
+		$("#boob-amount-label-number").text(boobSlider.slider('getValue'));
+	});
+	
+	$("div.group-selector.boob div.minus-button").click(function(){
+		boobSlider.slider('setValue',boobSlider.slider('getValue')-boobSlider.slider('getAttribute','step'));
+		$("#boob-amount-label-number").text(boobSlider.slider('getValue'));
+	});
+	
+	$("div.group-selector.fever div.plus-button").click(function(){
+		feverSlider.slider('setValue',Number(feverSlider.slider('getValue'))+Number(feverSlider.slider('getAttribute','step')));
+		$("#fever-amount-label-number").text(feverSlider.slider('getValue'));
+	});
+	
+	$("div.group-selector.fever div.minus-button").click(function(){
+		feverSlider.slider('setValue',Number(feverSlider.slider('getValue'))-Number(feverSlider.slider('getAttribute','step')));
+		$("#fever-amount-label-number").text(feverSlider.slider('getValue'));
+	});
 });
