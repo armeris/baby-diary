@@ -49,7 +49,16 @@ exports.getAggregatedData = function(req, res){
 
 exports.listBabies = function(req, res){
 	Baby.fetchByUser(req.user.id, function(data){
-		res.render('baby/babyList',{user:req.user, babies: data, moment: moment});
+		var lastFoodData = [];
+		for(var i=0;i < data.length; i++){
+			data[i].events.sort(function(a,b){
+				a.date - b.date
+			});
+			var lastEvent = data[i].events[data[i].events.length-1];
+			var msg = "";
+			lastFoodData[i] = {name: data[i].name, date: moment(lastEvent.date).format('DD/MM/YYYY HH:mm')};
+		}
+		res.render('baby/babyList',{user:req.user, babies: data, moment: moment, lastFoodData: lastFoodData});
 	});
 }
 
