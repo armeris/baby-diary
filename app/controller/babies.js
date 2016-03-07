@@ -51,13 +51,11 @@ exports.listBabies = function(req, res){
 	Baby.fetchByUser(req.user.id, function(data){
 		var lastFoodData = [];
 		for(var i=0;i < data.length; i++){
-			data[i].events.sort(function(a,b){
-				if(a < b) return -1;
-				if(a > b) return 1;
-				return 0;
+			var events = data[i].events; 
+			events.sort(function(a,b){
+				return a.date.getTime() - b.date.getTime() 
 			});
-			var lastEvent = data[i].events[data[i].events.length-1];
-			var msg = "";
+			var lastEvent = events[events.length-1];
 			lastFoodData[i] = {name: data[i].name, date: moment(lastEvent.date).tz('Europe/Madrid').format('DD/MM/YYYY HH:mm')};
 		}
 		res.render('baby/babyList',{user:req.user, babies: data, moment: moment, lastFoodData: lastFoodData});
