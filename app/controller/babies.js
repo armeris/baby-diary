@@ -58,7 +58,7 @@ exports.listBabies = function(req, res){
 			});
 			var lastEvent = data[i].events[data[i].events.length-1];
 			var msg = "";
-			lastFoodData[i] = {name: data[i].name, date: moment(lastEvent.date).format('DD/MM/YYYY HH:mm')};
+			lastFoodData[i] = {name: data[i].name, date: moment(lastEvent.date).tz('Europe/Madrid').format('DD/MM/YYYY HH:mm')};
 		}
 		res.render('baby/babyList',{user:req.user, babies: data, moment: moment, lastFoodData: lastFoodData});
 	});
