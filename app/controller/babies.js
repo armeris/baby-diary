@@ -52,7 +52,7 @@ exports.listBabies = function(req, res){
 		var lastFoodData = [];
 		for(var i=0;i < data.length; i++){
 			var events = data[i].events;
-			if(events){
+			if(events && events.length > 0){
 				events.sort(function(a,b){
 					return a.date.getTime() - b.date.getTime() 
 				});
