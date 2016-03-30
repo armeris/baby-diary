@@ -57,6 +57,9 @@ $(function(){
 			if($(this).parent().hasClass('line3')){
 						$('div.comments').children().removeClass('hidden').show();
 					}
+            if($(this).parent().hasClass('line3') && $(this).attr('data-type') === 'bottle'){
+                $("input[name=eventAmount]").val($('div.line4.bottle:visible').find('input').val());
+            }
 			if($(this).parent().hasClass('line2') ||
 					$(this).parent().hasClass('line1')){
 						$('div.comments').children().addClass('hidden').hide();
