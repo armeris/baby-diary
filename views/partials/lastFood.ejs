@@ -1,8 +1,8 @@
 <h1>Últimas comidas</h1>
-<% for(var i=0; i<lastFoodData.length; i++) {%>
-	<% if(lastFoodData[i]) { %>
+<% for(var i=0; i<babies.length; i++) {%>
+	<% if(babies[i].getLastFood()) { %>
 		<h4>
-			<%= lastFoodData[i].name %>: <%= lastFoodData[i].date %>
+			<%= babies[i].getLastFood().name %>: <%= babies[i].getLastFood().date %>
 		</h4>
 	<% } %>
 <% } %>

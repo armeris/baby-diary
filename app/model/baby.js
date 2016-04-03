@@ -93,4 +93,24 @@ babySchema.statics.deleteEvent = function (babyId, eventId){
 	});	
 };
 
+babySchema.methods.getLastFood = function() {
+	var events = this.events;
+ 	var lastFoodData = null;
+	
+	if(events){
+			events = events.filter(function(event){
+					return event.eventType === 'food';
+			});
+	}
+	if(events && events.length > 0){
+		events.sort(function(a,b){
+			return a.date.getTime() - b.date.getTime() 
+		});
+		var lastEvent = events[events.length-1];
+		lastFoodData = {name: this.name, date: moment(lastEvent.date).tz('Europe/Madrid').format('DD/MM/YYYY HH:mm')};
+	}
+	
+	return lastFoodData;
+}
+
 module.exports = mongoose.model('Baby', babySchema);

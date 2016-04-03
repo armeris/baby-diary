@@ -49,23 +49,7 @@ exports.getAggregatedData = function(req, res){
 
 exports.listBabies = function(req, res){
 	Baby.fetchByUser(req.user.id, function(data){
-		var lastFoodData = [];
-		for(var i=0;i < data.length; i++){
-			var events = data[i].events;
-            if(events){
-                events = events.filter(function(event){
-                    return event.eventType === 'food';
-                });
-            }
-			if(events && events.length > 0){
-				events.sort(function(a,b){
-					return a.date.getTime() - b.date.getTime() 
-				});
-				var lastEvent = events[events.length-1];
-				lastFoodData[i] = {name: data[i].name, date: moment(lastEvent.date).tz('Europe/Madrid').format('DD/MM/YYYY HH:mm')};
-			}
-		}
-		res.render('baby/babyList',{user:req.user, babies: data, moment: moment, lastFoodData: lastFoodData});
+		res.render('baby/babyList',{user:req.user, babies: data, moment: moment});
 	});
 }
 
